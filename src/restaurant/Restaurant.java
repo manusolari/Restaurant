@@ -1,20 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package restaurant;
 
-/**
- *
- * @author mariana
- */
+import accesoAdatos.MesaData;
+import entidades.Mesa;
+
 public class Restaurant {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+
+        Mesa m1 = new Mesa(1, 4, true);
+        Mesa m2 = new Mesa(2, 6, true);
+        MesaData mesa = new MesaData();
+
+        //mesa.agregarMesa(m1);
+        //mesa.agregarMesa(m2);
+        // mesa.ocuparMesa(1);
+                //mesa.liberarMesa(1);
+                //mesa.cambiarCapacidad(1, 6);
+                //mesa.quitarMesa(1);
+                //System.out.println(mesa.mesasLibres());
+        
     }
-    
+
 }
