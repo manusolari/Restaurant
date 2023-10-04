@@ -7,6 +7,8 @@ public class Mesa {
     private int capacidad;
 
     private boolean estadoMesa;
+    
+    
 
     public Mesa(int idMesa, int capacidad, boolean estadoMesa) {
         this.idMesa = idMesa;

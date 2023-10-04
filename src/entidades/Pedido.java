@@ -1,35 +1,42 @@
 package entidades;
 
+import java.time.LocalDate;
+
 public class Pedido {
 
     private int idPedido;
-
+    
     private Mesa m;
 
-    private Producto p;
+    private String nombre_mesero;
 
-    private Mesero mozo;
-
-    private double total;
+   
+    private double importe;
+    
+    private LocalDate fecha_hora;
+    
+    private boolean cobrada;
 
     public Pedido() {
     }
 
-    public Pedido(int idPedido, Mesa m, Producto p, Mesero mozo, double total) {
+    public Pedido(int idPedido, Mesa m, String nombre_mesero, double importe, LocalDate fecha_hora, boolean cobrada) {
         this.idPedido = idPedido;
         this.m = m;
-        this.p = p;
-        this.mozo = mozo;
-        this.total = total;
+        this.nombre_mesero = nombre_mesero;
+        this.importe = importe;
+        this.fecha_hora = fecha_hora;
+        this.cobrada = cobrada;
     }
 
-    public Pedido(Mesa m, Producto p, Mesero mozo, double total) {
+    public Pedido(Mesa m, String nombre_mesero, double importe, LocalDate fecha_hora, boolean cobrada) {
         this.m = m;
-        this.p = p;
-        this.mozo = mozo;
-        this.total = total;
+        this.nombre_mesero = nombre_mesero;
+        this.importe = importe;
+        this.fecha_hora = fecha_hora;
+        this.cobrada = cobrada;
     }
-    
+
     public int getIdPedido() {
         return idPedido;
     }
@@ -46,34 +53,42 @@ public class Pedido {
         this.m = m;
     }
 
-    public Producto getP() {
-        return p;
+    public String getNombre_mesero() {
+        return nombre_mesero;
     }
 
-    public void setP(Producto p) {
-        this.p = p;
+    public void setNombre_mesero(String nombre_mesero) {
+        this.nombre_mesero = nombre_mesero;
     }
 
-    public Mesero getMozo() {
-        return mozo;
+    public double getImporte() {
+        return importe;
     }
 
-    public void setMozo(Mesero mozo) {
-        this.mozo = mozo;
+    public void setImporte(double importe) {
+        this.importe = importe;
     }
 
-    public double getTotal() {
-        return total;
+    public LocalDate getFecha_hora() {
+        return fecha_hora;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setFecha_hora(LocalDate fecha_hora) {
+        this.fecha_hora = fecha_hora;
+    }
+
+    public boolean isCobrada() {
+        return cobrada;
+    }
+
+    public void setCobrada(boolean cobrada) {
+        this.cobrada = cobrada;
     }
 
     @Override
     public String toString() {
-        return "Pedido{" + "idPedido=" + idPedido + ", m=" + m + ", p=" + p + ", mozo=" + mozo + ", total=" + total + '}';
+        return "Pedido{" + "idPedido=" + idPedido + ", m=" + m + ", nombre_mesero=" + nombre_mesero + ", importe=" + importe + ", fecha_hora=" + fecha_hora + ", cobrada=" + cobrada + '}';
     }
     
-    
+     
 }
