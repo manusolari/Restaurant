@@ -1,6 +1,7 @@
 
 package accesoAdatos;
 
+
 import entidades.Mesa;
 import entidades.Producto;
 import java.sql.*;
@@ -72,9 +73,10 @@ public class ProductoData {
             JOptionPane.showMessageDialog(null, " Error al conectar con la tabla producto ");
          }
     }
-    public ArrayList<Producto> listarProducto (){
-        List <Producto> listaP = new ArrayList<>();
-        
-    }
-    
+//    public ArrayList<Producto> listarProducto (){
+//        List <Producto> listaP = new ArrayList<>();
+//        
+//    }
+//    
+
 }

@@ -10,33 +10,14 @@ public class Producto {
 
     private double precio;
 
-    private boolean estado;
-    
     public Producto() {
     }
 
-    public Producto(String nombre, int cantidad, double precio, boolean estado) {
-        this.nombre = nombre;
-        this.cantidad = cantidad;
-        this.precio = precio;
-        this.estado = estado;
-    }
-
-    
-    public Producto(int idProducto, String nombre, int cantidad, double precio, boolean estado) {
+    public Producto(int idProducto, String nombre, int cantidad, double precio) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.precio = precio;
-        this.estado = estado;
-    }
-
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
     }
 
     public int getIdProducto() {
@@ -73,10 +54,8 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", cantidad=" + cantidad + ", precio=" + precio + ", estado=" + estado + '}';
+        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", cantidad=" + cantidad + ", precio=" + precio + '}';
     }
-
-    
     
     
 }
