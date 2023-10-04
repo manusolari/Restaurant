@@ -38,7 +38,7 @@ public class MesaData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectarse a la base de datos");
+            JOptionPane.showMessageDialog(null, "Error al conectarse a la tabla mesa");
         }
 
         return listaMesas;

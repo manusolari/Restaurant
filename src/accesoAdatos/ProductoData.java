@@ -1,14 +1,9 @@
 
 package accesoAdatos;
 
-
-import entidades.Mesa;
 import entidades.Producto;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ProductoData {
@@ -73,10 +68,40 @@ public class ProductoData {
             JOptionPane.showMessageDialog(null, " Error al conectar con la tabla producto ");
          }
     }
-//    public ArrayList<Producto> listarProducto (){
-//        List <Producto> listaP = new ArrayList<>();
-//        
-//    }
-//    
+    public ArrayList<Producto> listarProducto (){
+        ArrayList <Producto> listaP = new ArrayList<>();
+        
+        String sql = "SELECT idProducto, nombre, cantidad, precio, estado FROM producto WHERE estado = 1";
+        
+         try {
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery();
+             
+             while(rs.next()){
+                 Producto p = new Producto();
+                 
+                 p.setIdProducto(rs.getInt("idProducto"));
+                 p.setNombre(rs.getString("nombre"));
+                 p.setCantidad(rs.getInt("cantidad"));
+                 p.setPrecio(rs.getDouble("precio"));
+                 p.setEstado(true);
+                 
+                 listaP.add(p);
+                 
+             }
+             int exito = ps.executeUpdate();
+             
+             if(exito == 1){
+                 JOptionPane.showMessageDialog(null, "Se agregó un producto a la lista");
+             }
+             ps.close();
+             
+         } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error al conectarse a la tabla producto");
+         }
+         
+         return listaP;
+  }
+   
 
 }
