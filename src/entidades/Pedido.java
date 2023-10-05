@@ -31,6 +31,14 @@ public class Pedido {
         this.cobrada = cobrada;
     }
 
+    public Pedido(Mesa mesa, String nombreMesero, LocalDate fechaHora) {
+        this.mesa = mesa;
+        this.nombreMesero = nombreMesero;
+        this.fechaHora = fechaHora;
+    }
+    
+    
+
     public int getIdPedido() {
         return idPedido;
     }
