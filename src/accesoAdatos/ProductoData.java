@@ -126,5 +126,7 @@ public class ProductoData {
 
         return stock;
     }
+    
+    
 
 }
