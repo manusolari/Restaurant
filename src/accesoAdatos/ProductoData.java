@@ -55,7 +55,7 @@ public class ProductoData {
     }
 
     public void eliminarProducto(String nombre) {
-        String sql = "DELETE FROM producto WHERE nombre = ? ";
+        String sql = " UPDATE producto SET estado = 0 WHERE nombre = ? ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, nombre);
@@ -101,7 +101,7 @@ public class ProductoData {
 
     public int consultarStock(Producto p) {
         String sql = "SELECT cantidad FROM producto WHERE idProducto = ? AND estado = 1 ";
-        String sql2 = "UPDATE producto SET estado = 0 WHERE idProducto= ? ";
+       
         int stock = 0;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -109,16 +109,9 @@ public class ProductoData {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 stock = rs.getInt("cantidad");
-                if (stock <= 0) {
-                    ps = con.prepareStatement(sql2);
-                    ps.setInt(1, p.getIdProducto());
-                    int exito = ps.executeUpdate();
-                    if (exito == 1) {
-                        JOptionPane.showMessageDialog(null, "Se ha modificado el estado del producto a 0");
+               
                     }
 
-                }
-            }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectarse a la tabla producto");

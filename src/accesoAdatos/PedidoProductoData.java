@@ -4,6 +4,8 @@
  */
 package accesoAdatos;
 
+import entidades.Pedido;
+import entidades.Producto;
 import java.sql.Connection;
 
 /**
@@ -12,9 +14,14 @@ import java.sql.Connection;
  */
 public class PedidoProductoData {
      private Connection con = null;
-
-    public PedidoProductoData() {
+     private Pedido pedido;
+    private Producto producto;
+     
+     public PedidoProductoData() {
         con = Conexion.conectarse();
+        pedido = new Pedido();
+        producto = new Producto();
+        
     }
     
     

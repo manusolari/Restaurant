@@ -102,7 +102,7 @@ public class MesaData {
     
     public void quitarMesa(int id){
         
-        String sql = "DELETE FROM mesa WHERE idMesa=?";
+        String sql = "UPDATE mesa SET estado = 0 WHERE idMesa = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);

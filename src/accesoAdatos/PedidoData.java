@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -105,4 +104,32 @@ public class PedidoData {
             JOptionPane.showMessageDialog(null, "No se puede conectar a la tabla Pedido");
         }
     }
+    
+    public ArrayList <Pedido> listaXMesero(String nombre){
+        ArrayList <Pedido> listaxMesero = new ArrayList <>();
+        Mesa m = new Mesa();
+        String sql = " SELECT idPedido, idMesa, importe, cobrada, fecha_hora, nombreMesero  FROM pedido WHERE 1 " ;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+            Pedido p = new Pedido();
+            p.setIdPedido(rs.getInt("idPedido"));
+            //p.setMesa(m.setIdMesa(rs.getInt("idMesa")));
+            p.setImporte(rs.getDouble("importe"));
+            p.setCobrada(rs.getBoolean("cobrada"));
+            p.setFechaHora(rs.getDate("fecha_hora").toLocalDate());
+            p.setNombreMesero(rs.getString("nombreMesero"));
+            listaxMesero.add(p);
+                    }
+    
+        
+        
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se puede conectar a la tabla Pedido");
+        }
+        return listaxMesero;
+    }
+
+
 }
