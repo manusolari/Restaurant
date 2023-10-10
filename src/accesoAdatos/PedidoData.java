@@ -34,9 +34,11 @@ public class PedidoData {
             ps.setInt(1, p.getMesa().getIdMesa());
             ps.setDate(2, Date.valueOf(p.getFechaHora()));
             ps.setString(3, p.getNombreMesero());           
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
+           ps.executeUpdate();
+           ResultSet rs = ps.getGeneratedKeys();
+           if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Pedido iniciado con exito");
+               p.setIdPedido(rs.getInt(1));
                 md.ocuparMesa(p.getMesa().getIdMesa());
             }
         
@@ -115,11 +117,14 @@ public class PedidoData {
             while (rs.next()){
             Pedido p = new Pedido();
             p.setIdPedido(rs.getInt("idPedido"));
-            //p.setMesa(m.setIdMesa(rs.getInt("idMesa")));
+            int idmesa = (rs.getInt("idMesa"));
+            m.setIdMesa(idmesa);
+            p.setMesa(m);
             p.setImporte(rs.getDouble("importe"));
             p.setCobrada(rs.getBoolean("cobrada"));
             p.setFechaHora(rs.getDate("fecha_hora").toLocalDate());
             p.setNombreMesero(rs.getString("nombreMesero"));
+            
             listaxMesero.add(p);
                     }
     

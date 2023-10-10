@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -81,19 +82,21 @@ public class MesaData {
 
     public void agregarMesa(Mesa mesa) {
 
-        String sql = "INSERT INTO mesa( idMesa, capacidad, estado) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO mesa( numeroMesa, capacidad, estado) VALUES (  ? , ?, ? )";
 
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1, mesa.getIdMesa());
+            
+            ps.setInt(1, mesa.getNumeroMesa());
             ps.setInt(2, mesa.getCapacidad());
             ps.setBoolean(3, mesa.isEstadoMesa());
-            int exito = ps.executeUpdate();
-
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Se agregó una mesa");
-            }
+             ps.executeUpdate();
+             ResultSet rs = ps.getGeneratedKeys();
+           if (rs.next()){
+               mesa.setIdMesa(rs.getInt(1 ));
+               JOptionPane.showMessageDialog(null, "Se Agrego una Mesa ");
+           }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectar con la tabla mesa");
