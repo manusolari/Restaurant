@@ -90,7 +90,7 @@ public class MesaData {
             
             ps.setInt(1, mesa.getNumeroMesa());
             ps.setInt(2, mesa.getCapacidad());
-            ps.setBoolean(3, mesa.isEstadoMesa());
+            ps.setBoolean(3, true);
              ps.executeUpdate();
              ResultSet rs = ps.getGeneratedKeys();
            if (rs.next()){
