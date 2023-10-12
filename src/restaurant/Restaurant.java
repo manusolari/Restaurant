@@ -2,6 +2,7 @@ package restaurant;
 
 import accesoAdatos.MesaData;
 import accesoAdatos.PedidoData;
+import accesoAdatos.PedidoProductoData;
 import accesoAdatos.ProductoData;
 import entidades.Mesa;
 import entidades.Pedido;
@@ -18,8 +19,8 @@ public class Restaurant {
         Mesa m2 = new Mesa(2, 6, true);
         MesaData mesa = new MesaData();
 
-        mesa.agregarMesa(m1);
-        mesa.agregarMesa(m2);
+        //mesa.agregarMesa(m1);
+        //mesa.agregarMesa(m2);
         // mesa.ocuparMesa(1);
         //mesa.liberarMesa(1);
         //mesa.cambiarCapacidad(1, 6);
@@ -28,10 +29,10 @@ public class Restaurant {
         
         //Producto pr1 = new Producto(1, "coca", 1, 500, true);
         //Producto p2 = new Producto(2, "sprite", 1, 500, true);
-        //Producto p3 = new Producto(3, "hamburguesa", 10, 1000, true);
+        Producto p3 = new Producto(3, "hamburguesa", 10, 1000, true);
         ProductoData pd = new ProductoData();
 
-        //pd.agregarProducto(p1);
+        //pd.agregarProducto(p3);
 //        pd.modificarProducto(p2);
 //        System.out.println(pd.listarProducto());
         //pd.eliminarProducto("sprite");
@@ -47,10 +48,12 @@ public class Restaurant {
        // pedData.calcularImporte(3);
        
     Pedido p1 = new Pedido(m2, "Pepe", LocalDate.now(ZoneId.systemDefault()));
-    pedData.iniciarPedido(p1);
-    pedData.iniciarPedido(p);
+    //pedData.iniciarPedido(p1);
+    //pedData.iniciarPedido(p);
     
-//PedidoProducto pdProd= new PedidoProducto (p2, p1, 1);
+PedidoProducto pdProd= new PedidoProducto (p3, p1, 1);
+PedidoProductoData ppd = new PedidoProductoData();
+ppd.iniciarPedidoProducto(pdProd);
        
     }
 
