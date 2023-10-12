@@ -33,7 +33,26 @@ public class PedidoProductoData {
     }
     
      public void iniciarPedidoProducto(PedidoProducto pp){
-     String sql = "INSERT INTO pedido_producto ( IdPedido , idProducto , cantidad ) "
+     String sql = "INSERT INTO pedido_producto ( idPedido , idProducto , cantidad ) "
+             + " VALUES ( ? , ? , ? )";
+     PreparedStatement ps;
+         try {
+             ps = con.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS);
+             System.out.println(pp.getPedido().toString());
+             ps.setInt(1, pp.getPedido().getIdPedido() );
+             ps.setInt(2, pp.getProducto().getIdProducto() );
+              ps.setInt(3, pp.getCantidad() );
+              ps.executeUpdate();
+              ResultSet rs = ps.getGeneratedKeys();
+              if(rs.next()){
+              pp.setIdPedidoProducto(rs.getInt(1));
+              }
+         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al conectar con la tabla Pedido Producto ");
+         }
+     }
+public void iniciarPedidoProducto2 (PedidoProducto pp){
+     String sql = "INSERT INTO pedido_producto ( idPedido , idProducto , cantidad ) "
              + " VALUES ( ? , ? , ? )";
      PreparedStatement ps;
          try {
@@ -50,6 +69,15 @@ public class PedidoProductoData {
          } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, " Error al conectar con la tabla Pedido Producto ");
          }
+
+
+
+
+
+
+
+
+
 //
 //         public PedidoProducto buscarPP(String nombre){
 //         String sql = "SELECT pedido_producto.* , producto.nombre 

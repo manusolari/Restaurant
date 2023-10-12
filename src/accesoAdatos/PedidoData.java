@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -109,13 +110,14 @@ public class PedidoData {
     
     public ArrayList <Pedido> listaXMesero(String nombre){
         ArrayList <Pedido> listaxMesero = new ArrayList <>();
-        Mesa m = new Mesa();
+       
         String sql = " SELECT idPedido, idMesa, importe, cobrada, fecha_hora, nombreMesero  FROM pedido WHERE 1 " ;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-            Pedido p = new Pedido();
+                 Mesa m = new Mesa();
+                Pedido p = new Pedido();
             p.setIdPedido(rs.getInt("idPedido"));
             int idmesa = (rs.getInt("idMesa"));
             m.setIdMesa(idmesa);
@@ -135,6 +137,59 @@ public class PedidoData {
         }
         return listaxMesero;
     }
-
+    
+    public ArrayList <Pedido> listarPedidosXFecha (LocalDate fecha1, LocalDate fecha2){
+         ArrayList <Pedido> listaFecha = new ArrayList <>();
+        String sql = "SELECT * FROM `pedido` WHERE fecha_hora BETWEEN ? and ? ";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(fecha1));
+            ps.setDate(1, Date.valueOf(fecha2));
+            ResultSet rs =  ps.executeQuery();
+            
+            while(rs.next()){
+             Mesa m = new Mesa();
+                Pedido p = new Pedido();
+            p.setIdPedido(rs.getInt("idPedido"));
+            int idmesa = (rs.getInt("idMesa"));
+            m.setIdMesa(idmesa);
+            p.setMesa(m);
+            p.setImporte(rs.getDouble("importe"));
+            p.setCobrada(rs.getBoolean("cobrada"));
+            p.setFechaHora(rs.getDate("fecha_hora").toLocalDate());
+            p.setNombreMesero(rs.getString("nombreMesero"));
+            
+            listaFecha.add(p);
+            }
+        
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "No se puede conectar a la tabla Pedido");
+        }
+        return listaFecha; 
+    }
+    
+    public int pedidoXIdMesa(Mesa m){
+    int id = 0;
+    String sql = " SELECT * FROM pedido WHERE idMesa = ? ";
+    PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql);
+            
+            System.out.println(m = md.buscarMesaPorNumero(m.getNumeroMesa()));
+            
+            ps.setInt(1, m.getIdMesa());
+             ResultSet rs = ps.executeQuery();
+           
+             if  (rs.next()){
+                 System.out.println("hola");
+                 id = rs.getInt(1);
+                 
+             }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se puede conectar a la tabla Pedido");
+        }
+           
+    return id;
+    }
 
 }

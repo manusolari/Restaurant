@@ -48,7 +48,8 @@ public class Restaurant {
        // pedData.calcularImporte(3);
        
     Pedido p1 = new Pedido(m2, "Pepe", LocalDate.now(ZoneId.systemDefault()));
-    //pedData.iniciarPedido(p1);
+    //
+       // System.out.println(pedData.pedidoXIdMesa(m2));
     //pedData.iniciarPedido(p);
     
 PedidoProducto pdProd= new PedidoProducto (p3, p1, 1);
