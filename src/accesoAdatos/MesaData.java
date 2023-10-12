@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class MesaData {
@@ -137,4 +139,36 @@ public class MesaData {
             
         }
     }
+    
+      public ArrayList<Mesa> listarMesas(){
+        ArrayList <Mesa> lista= new ArrayList<>();
+        String sql="SELECT * FROM mesa ";
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs= ps.executeQuery();
+            while (rs.next()){
+                Mesa m= new Mesa();
+                m.setIdMesa(rs.getInt("idMesa"));
+                m.setNumeroMesa(rs.getInt("numeroMesa"));
+                m.setCapacidad(rs.getInt("capacidad"));
+                m.setEstadoMesa(rs.getBoolean("estado"));
+                lista.add(m);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MesaData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+    public Mesa buscarMesaPorNumero(int numero){
+        Mesa m= new Mesa();
+        ArrayList<Mesa> mesas= listarMesas();
+        for (Mesa i : mesas){
+            if (i.getNumeroMesa()==numero){
+                m=i;
+            }
+        }
+        return m;
+    }
+    
 }
