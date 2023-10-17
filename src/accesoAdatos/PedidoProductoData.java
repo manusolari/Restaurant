@@ -32,50 +32,32 @@ public class PedidoProductoData {
         
     }
     
-     public void iniciarPedidoProducto(PedidoProducto pp){
-     String sql = "INSERT INTO pedido_producto ( idPedido , idProducto , cantidad ) "
-             + " VALUES ( ? , ? , ? )";
-     PreparedStatement ps;
-         try {
-             ps = con.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS);
-             System.out.println(pp.getPedido().toString());
-             ps.setInt(1, pp.getPedido().getIdPedido() );
-             ps.setInt(2, pp.getProducto().getIdProducto() );
-              ps.setInt(3, pp.getCantidad() );
-              ps.executeUpdate();
-              ResultSet rs = ps.getGeneratedKeys();
-              if(rs.next()){
-              pp.setIdPedidoProducto(rs.getInt(1));
-              }
-         } catch (SQLException ex) {
+    public void iniciarPedidoProducto(PedidoProducto pp) {
+          PedidoData pd = new PedidoData();   
+        String sql = "INSERT INTO pedido_producto ( idPedido , idProducto , cantidad ) "
+                + " VALUES ( ? , ? , ? )";
+         PreparedStatement ps;
+
+        try {
+            
+            ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            System.out.println(pd.pedidoXIdMesa(pp.getPedido().getMesa()));
+            System.out.println((pp.getProducto().getIdProducto()));
+            //int id = pd.pedidoXIdMesa(pedido.getMesa());
+           
+            ps.setInt(1, pd.pedidoXIdMesa(pp.getPedido().getMesa()));
+            ps.setInt(2, pp.getProducto().getIdProducto());
+            ps.setInt(3, pp.getCantidad());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                pp.setIdPedidoProducto(rs.getInt(1));
+            }
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, " Error al conectar con la tabla Pedido Producto ");
-         }
-     }
-public void iniciarPedidoProducto2 (PedidoProducto pp){
-     String sql = "INSERT INTO pedido_producto ( idPedido , idProducto , cantidad ) "
-             + " VALUES ( ? , ? , ? )";
-     PreparedStatement ps;
-         try {
-             ps = con.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS);
-              
-             ps.setInt(1, pp.getPedido().getIdPedido() );
-             ps.setInt(2, pp.getProducto().getIdProducto() );
-              ps.setInt(3, pp.getCantidad() );
-              ps.executeUpdate();
-              ResultSet rs = ps.getGeneratedKeys();
-              if(rs.next()){
-              pp.setIdPedidoProducto(rs.getInt(1));
-              }
-         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al conectar con la tabla Pedido Producto ");
-         }
+        }
 
-
-
-
-
-
-
+    }
 
 
 //
@@ -92,13 +74,17 @@ public void iniciarPedidoProducto2 (PedidoProducto pp){
 //                 + " cantidad = ?  WHERE 1";
 //         PreparedStatement ps;
 //         try {
-//             ps = con.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS);
-//         } catch (SQLException ex) {
-//             Logger.getLogger(PedidoProductoData.class.getName()).log(Level.SEVERE, null, ex);
-//         }
-//         }
+//             ps = con.prepareStatement(sql);
+/*         } catch (SQLException ex) {
+                ps.
+                 ps.setInt(1, id);
+            ps.setInt(2, pp.getProducto().getIdProducto());
+            ps.setInt(3, pp.getCantidad());
+    
+//JOptionPane.showMessageDialog(null, " Error al conectar con la tabla Pedido Producto ");//         }
+*/         }
          
          
          
-     }
-}
+     
+

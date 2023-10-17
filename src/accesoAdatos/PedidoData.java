@@ -136,7 +136,7 @@ public class PedidoData {
             JOptionPane.showMessageDialog(null, "No se puede conectar a la tabla Pedido");
         }
         return listaxMesero;
-    }
+    } 
     
     public ArrayList <Pedido> listarPedidosXFecha (LocalDate fecha1, LocalDate fecha2){
          ArrayList <Pedido> listaFecha = new ArrayList <>();
@@ -168,28 +168,46 @@ public class PedidoData {
         return listaFecha; 
     }
     
+     //Listar ingresos sumando totales de pedidos para una fecha en particular.
+//        public double listarImporteXfecha(LocalDate fecha1){
+//        
+//        
+//        }
+    
     public int pedidoXIdMesa(Mesa m){
     int id = 0;
-    String sql = " SELECT * FROM pedido WHERE idMesa = ? ";
+    String sql = " SELECT pedido.* FROM pedido JOIN mesa ON(pedido.idMesa = mesa.idMesa) "
+            + " WHERE pedido.idMesa = ? AND mesa.estado = 0 " ;
     PreparedStatement ps;
         try {
             ps = con.prepareStatement(sql);
             
-            System.out.println(m = md.buscarMesaPorNumero(m.getNumeroMesa()));
+            m = md.buscarMesaPorNumero(m.getNumeroMesa());
             
             ps.setInt(1, m.getIdMesa());
-             ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
+            //System.out.println(rs.isFirst());
+           
            
              if  (rs.next()){
-                 System.out.println("hola");
+                
                  id = rs.getInt(1);
                  
              }
-        } catch (SQLException ex) {
+        }catch (NullPointerException nfe){
+                    JOptionPane.showMessageDialog(null, "Hubo un error al Ingresar la informacion de Mesa, Por favor compruebe la informacion");
+                    } 
+        catch (SQLException ex) {
+            
             JOptionPane.showMessageDialog(null, "No se puede conectar a la tabla Pedido");
         }
            
     return id;
     }
+
+
+
+    
+
 
 }
