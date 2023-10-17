@@ -28,12 +28,12 @@ public class Restaurant {
         //mesa.quitarMesa(1);
         //System.out.println(mesa.mesasLibres());
         
-        //Producto pr1 = new Producto(1, "coca", 1, 500, true);
-        //Producto p2 = new Producto(2, "sprite", 1, 500, true);
+       Producto p1 = new Producto(1, "coca", 1, 500, true);
+        Producto p2 = new Producto(2, "sprite", 1, 500, true);
         Producto p3 = new Producto(3, "hamburguesa", 10, 1000, true);
         ProductoData pd = new ProductoData();
 
-        //pd.agregarProducto(p3);
+        //pd.agregarProducto(p2);
 //        pd.modificarProducto(p2);
 //        System.out.println(pd.listarProducto());
         //pd.eliminarProducto("sprite");
@@ -44,19 +44,19 @@ public class Restaurant {
       
       PedidoData pedData= new PedidoData();
       //pedData.iniciarPedido(p23);
-//       pd.agregarProducto(p1);
-//       pd.agregarProducto(p3);
-        //PedidoProducto pdProd= new PedidoProducto (p3, p, 5);
+      //pd.agregarProducto(p1);
+      //pd.agregarProducto(p3);
+       //PedidoProducto pdProd= new PedidoProducto (p3, p, 5);
         
        // pedData.calcularImporte(3);
        
-    Pedido p1 = new Pedido(m2, "Pepe", LocalDate.now(ZoneId.systemDefault()));
+    Pedido ped1 = new Pedido(m2, "Pepe", LocalDate.now(ZoneId.systemDefault()));
     
     //
       // System.out.println(pedData.pedidoXIdMesa(m2));
     //pedData.iniciarPedido(p);
     
-PedidoProducto pdProd= new PedidoProducto (p3, p23, 1);
+PedidoProducto pdProd= new PedidoProducto (p2, p23, 1);
 PedidoProductoData ppd = new PedidoProductoData();
     ppd.iniciarPedidoProducto(pdProd);
         //System.out.println(mesa.buscarMesaPorNumero(1));
