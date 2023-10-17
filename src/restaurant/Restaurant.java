@@ -28,11 +28,11 @@ public class Restaurant {
         //mesa.quitarMesa(1);
         //System.out.println(mesa.mesasLibres());
         
-       Producto p1 = new Producto(1, "coca", 1, 500, true);
-        Producto p2 = new Producto(2, "sprite", 1, 500, true);
-        Producto p3 = new Producto(3, "hamburguesa", 10, 1000, true);
+//       Producto p1 = new Producto(1, "coca", 1, 500, true);
+//        Producto p2 = new Producto(2, "sprite", 1, 500, true);
+//        Producto p3 = new Producto(3, "hamburguesa", 10, 1000, true);
         ProductoData pd = new ProductoData();
-
+    
         //pd.agregarProducto(p2);
 //        pd.modificarProducto(p2);
 //        System.out.println(pd.listarProducto());
@@ -54,12 +54,25 @@ public class Restaurant {
     
     //
       // System.out.println(pedData.pedidoXIdMesa(m2));
-    //pedData.iniciarPedido(p);
-    
-PedidoProducto pdProd= new PedidoProducto (p2, p23, 1);
+   // pedData.iniciarPedido(p);
+   //pedData.iniciarPedido(p);
+//PedidoProducto pdProd= new PedidoProducto (p2, p23, 1);
+//PedidoProducto pdProd1= new PedidoProducto (p3, p23, 1);
 PedidoProductoData ppd = new PedidoProductoData();
-    ppd.iniciarPedidoProducto(pdProd);
+    //ppd.iniciarPedidoProducto(pdProd1);
         //System.out.println(mesa.buscarMesaPorNumero(1));
+        
+        //System.out.println( pedData.calcularImporte(7));
+        //pedData.listaXMesero("Melquiades");
+        
+      Producto p7= new Producto("Cerveza", 10, 1000, true);
+      //pd.agregarProducto(p7);
+      Mesa m6= new Mesa(4, 6, true);
+      //mesa.agregarMesa(m6);
+      Pedido ped = new Pedido(m6, "Pepe", LocalDate.now(ZoneId.systemDefault()));
+      //pedData.iniciarPedido(ped);
+      PedidoProducto pdProd= new PedidoProducto (p7, ped, 2);
+      ppd.iniciarPedidoProducto(pdProd);
     }
 
 }

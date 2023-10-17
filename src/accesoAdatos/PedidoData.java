@@ -27,12 +27,13 @@ public class PedidoData {
     }
 
     public void iniciarPedido(Pedido p) {
-
+        Mesa m= new Mesa();
         String sql = "INSERT INTO pedido( idMesa, fecha_hora , nombreMesero, importe , cobrada) VALUES (?, ?, ? , 0 , 0)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, p.getMesa().getIdMesa());
+            m=md.buscarMesaPorNumero(p.getMesa().getNumeroMesa());
+            ps.setInt(1, m.getIdMesa());
             ps.setDate(2, Date.valueOf(p.getFechaHora()));
             ps.setString(3, p.getNombreMesero());           
            ps.executeUpdate();
@@ -40,7 +41,7 @@ public class PedidoData {
            if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Pedido iniciado con exito");
                p.setIdPedido(rs.getInt(1));
-                md.ocuparMesa(p.getMesa().getIdMesa());
+                md.ocuparMesa(m.getIdMesa());
             }
         
                 
@@ -55,6 +56,7 @@ public class PedidoData {
         String sql = "SELECT p.precio, p.nombre , pp.cantidad, pp.idProducto FROM pedido_producto AS pp, producto AS p "
                 + "WHERE pp.IdPedido= ? AND p.idProducto= pp.idProducto";
         double total = 0;
+        
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idPedido);
@@ -94,13 +96,15 @@ public class PedidoData {
 
     public void cobrarPedido(Pedido p) {
         String sql = "UPDATE pedido SET cobrada= 1 WHERE idPedido = ? ";
+        Mesa m= new Mesa();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
+            m=md.buscarMesaPorNumero(p.getMesa().getNumeroMesa());
             ps.setInt(1, p.getIdPedido());
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Mesa cobrada con exito");
-                md.liberarMesa(p.getMesa().getIdMesa());
+                md.liberarMesa(m.getIdMesa());
             }
 
         } catch (SQLException ex) {

@@ -36,11 +36,16 @@ public class PedidoProductoData {
           PedidoData pd = new PedidoData();   
         String sql = "INSERT INTO pedido_producto ( idPedido , idProducto , cantidad ) "
                 + " VALUES ( ? , ? , ? )";
-         PreparedStatement ps;
-
+          ProductoData prd= new ProductoData();
+          Producto p= pp.getProducto();
+        p.setIdProducto(prd.buscarProductoXnombre(pp.getProducto().getNombre()));
+         System.out.println(habilitarPedido(pp.getProducto(), pp.getCantidad()));
+         System.out.println(pp.getProducto());
+         if(habilitarPedido(pp.getProducto(), pp.getCantidad())){
+              
         try {
             
-            ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+           PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             System.out.println(pd.pedidoXIdMesa(pp.getPedido().getMesa()));
             System.out.println((pp.getProducto().getIdProducto()));
             //int id = pd.pedidoXIdMesa(pedido.getMesa());
@@ -52,14 +57,47 @@ public class PedidoProductoData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 pp.setIdPedidoProducto(rs.getInt(1));
+                restarStock(pp.getProducto(), pp.getCantidad());
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, " Error al conectar con la tabla Pedido Producto ");
         }
-
+         }
+         else{
+             JOptionPane.showMessageDialog(null, "No hay stock suficiente para realizar el pedido");
+         }
     }
+    
+    public boolean habilitarPedido(Producto p, int cantidad){
+        ProductoData pd= new ProductoData();
+      int stock= pd.consultarStock(p);
+     if(stock>=cantidad){
+         return true;
+     }
+     else{
+         return false;
+     }
+    }
+    
 
-
+  public void restarStock(Producto p, int cantidad){
+      ProductoData pd= new ProductoData();
+      int stock= pd.consultarStock(p);
+      if(habilitarPedido(p, cantidad)){
+          String sql= "UPDATE producto SET cantidad=? WHERE idProducto=?";
+          try {
+              PreparedStatement ps= con.prepareStatement(sql);
+              ps.setInt(1, stock-cantidad);
+              ps.setInt(2, p.getIdProducto());
+              int exito= ps.executeUpdate();
+              if(exito==1){
+                  JOptionPane.showMessageDialog(null, "Se modifico el sotck quedan: "+(stock-cantidad));
+              }
+          } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, " Error al conectar con la tabla  Producto ");
+          }
+       
+  }
 //
 //         public PedidoProducto buscarPP(String nombre){
 //         String sql = "SELECT pedido_producto.* , producto.nombre 
@@ -82,7 +120,7 @@ public class PedidoProductoData {
             ps.setInt(3, pp.getCantidad());
     
 //JOptionPane.showMessageDialog(null, " Error al conectar con la tabla Pedido Producto ");//         }
-*/         }
+*/         }}
          
          
          

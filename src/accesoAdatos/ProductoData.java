@@ -3,6 +3,8 @@ package accesoAdatos;
 import entidades.Producto;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ProductoData {
@@ -121,6 +123,20 @@ public class ProductoData {
         return stock;
     }
     
-    
-
+     public int buscarProductoXnombre(String nombre){
+      int id=0;
+      String sql="SELECT * FROM producto WHERE nombre = ?";
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ps.setString(1, nombre);
+            ResultSet rs= ps.executeQuery();
+            if(rs.next()){
+                id= rs.getInt(1);
+            }
+            
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error al conectarse a la tabla producto");
+     }
+    return id;
+     }
 }
