@@ -59,6 +59,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         });
 
         jMenuItem1.setText("Productos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jmProductos.add(jMenuItem1);
 
         jmMesas.setText("Mesas");
@@ -221,6 +226,15 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         dpPanel.add(vip);
         dpPanel.moveToFront(vip);
     }//GEN-LAST:event_jmIniciarPedActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       dpPanel.removeAll();
+        dpPanel.repaint();
+        VistasProducto vp = new VistasProducto();
+        vp.setVisible(true);
+        dpPanel.add(vp);
+        dpPanel.moveToFront(vp);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
