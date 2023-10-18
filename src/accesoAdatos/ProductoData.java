@@ -139,4 +139,47 @@ public class ProductoData {
      }
     return id;
      }
+     //---------------AgregadoUltimo-------------
+     public Producto buscarProductoPorId(int idProducto){
+        Producto p= new Producto();
+        String sql= "SELECT * FROM producto WHERE idProducto = ?";
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ps.setInt(1, idProducto);
+            ResultSet rs= ps.executeQuery();
+            if (rs.next()){
+               p.setIdProducto(idProducto);
+               p.setNombre(rs.getString("nombre"));
+               p.setCantidad(rs.getInt("cantidad"));
+               p.setPrecio(rs.getDouble("precio"));
+               p.setEstado(rs.getBoolean("estado"));
+            }
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error al conectar con la tabla producto");
+        }
+        return p;
+    }
+     
+     public ArrayList<Producto> listarProductos(){
+        
+         ArrayList <Producto> lista= new ArrayList<>();
+         String sql= "SELECT * FROM producto WHERE estado = 1";
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                 Producto p= new Producto();
+                 p.setIdProducto(rs.getInt("idProducto"));
+                 p.setNombre(rs.getString("nombre"));
+                 p.setCantidad(rs.getInt("cantidad"));
+                 p.setPrecio(rs.getDouble("precio"));
+                 p.setEstado(true);
+                 lista.add(p);
+                 
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectar con la tabla producto");
+        }
+        return lista;
+     }
 }

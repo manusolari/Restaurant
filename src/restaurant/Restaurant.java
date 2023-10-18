@@ -72,7 +72,11 @@ PedidoProductoData ppd = new PedidoProductoData();
       Pedido ped = new Pedido(m6, "Pepe", LocalDate.now(ZoneId.systemDefault()));
       //pedData.iniciarPedido(ped);
       PedidoProducto pdProd= new PedidoProducto (p7, ped, 2);
-      ppd.iniciarPedidoProducto(pdProd);
+      //ppd.iniciarPedidoProducto(pdProd);
+      //----------Prueba de listar pedidos por id-------------
+        //System.out.println( ppd.listarPedidoProductoXPedido(7));
+        System.out.println(pd.listarProducto());
+        
     }
 
 }

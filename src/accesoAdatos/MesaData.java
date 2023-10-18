@@ -170,6 +170,25 @@ public class MesaData {
         }
         return m;
     }
+    //----------AgrgadoUltimo-------------------------------------------------
+    public Mesa buscarMesaPorId(int idMesa){
+        Mesa m= new Mesa();
+        String sql= "SELECT * FROM mesa WHERE idMesa = ?";
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ps.setInt(1, idMesa);
+            ResultSet rs= ps.executeQuery();
+            if (rs.next()){
+                m.setIdMesa(idMesa);
+                m.setNumeroMesa(rs.getInt("numeroMesa"));
+                m.setCapacidad(rs.getInt("capacidad"));
+                m.setEstadoMesa(rs.getBoolean("estado"));
+            }
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error al conectar con la tabla mesa");
+        }
+        return m;
+    }
     
     
     

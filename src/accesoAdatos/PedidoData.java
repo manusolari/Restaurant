@@ -208,7 +208,28 @@ public class PedidoData {
            
     return id;
     }
-
+    public Pedido buscarPedidoXid(int idPedido){
+        Pedido p= new Pedido();
+        
+        String sql="SELECT * FROM pedido WHERE idPedido = ?";
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ps.setInt(1, idPedido);
+            ResultSet rs= ps.executeQuery();
+            if(rs.next()){
+                p.setIdPedido(idPedido);
+                p.setMesa(md.buscarMesaPorId(rs.getInt("idMesa")));
+                p.setImporte(rs.getDouble("importe"));
+                p.setCobrada(rs.getBoolean("cobrada"));
+                p.setFechaHora(rs.getDate("fecha_hora").toLocalDate());
+                p.setNombreMesero(rs.getString("nombreMesero"));
+                
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se puede conectar a la tabla Pedido");
+        }
+        return p;
+    }
 
 
     
