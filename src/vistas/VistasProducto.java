@@ -42,7 +42,6 @@ public class VistasProducto extends javax.swing.JInternalFrame {
         jtCantidad = new javax.swing.JTextField();
         jtPrecio = new javax.swing.JTextField();
         jbGuardar = new javax.swing.JButton();
-        jbModificar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -103,8 +102,6 @@ public class VistasProducto extends javax.swing.JInternalFrame {
             }
         });
 
-        jbModificar.setText("Modificar");
-
         jbEliminar.setText("Eliminar");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,7 +127,7 @@ public class VistasProducto extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
                                 .addComponent(jbGuardar)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(3, 3, 3)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,9 +136,7 @@ public class VistasProducto extends javax.swing.JInternalFrame {
                                             .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(47, 47, 47)
-                                        .addComponent(jbModificar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(148, 148, 148)
                                         .addComponent(jbEliminar))))
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
@@ -181,7 +176,6 @@ public class VistasProducto extends javax.swing.JInternalFrame {
                 .addGap(96, 96, 96)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar)
-                    .addComponent(jbModificar)
                     .addComponent(jbEliminar))
                 .addGap(9, 9, 9)
                 .addComponent(jButton1)
@@ -204,7 +198,27 @@ public class VistasProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtPrecioActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        // TODO add your handling code here:
+       try{
+        String nombre = jtNombre.getText();
+        if (nombre.isEmpty()){
+        JOptionPane.showMessageDialog(this, "Alguno de los campos esta Vacio");
+        return; 
+        }
+         
+        int id = pd.buscarProductoXnombre(nombre);
+        p = pd.buscarProductoPorId(id);
+        if(p.isEstado()){
+        jtCantidad.setText(String.valueOf(p.getCantidad()));
+        jtPrecio.setText(String.valueOf(p.getPrecio()));
+        pd.eliminarProducto(jtNombre.getText());
+        Limpiar();
+        }else{
+         JOptionPane.showMessageDialog(this, "El Producto ya esta eliminado");
+        }
+       }
+       catch (NumberFormatException nfe){
+       JOptionPane.showMessageDialog(this, "Alguno de los campos esta Vacio");
+       }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
@@ -284,7 +298,6 @@ public class VistasProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
-    private javax.swing.JButton jbModificar;
     private javax.swing.JTextField jtCantidad;
     private javax.swing.JTextField jtNombre;
     private javax.swing.JTextField jtPrecio;
