@@ -67,13 +67,30 @@ public class VistasListaDeProducto extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableProducto.setRequestFocusEnabled(false);
         jScrollPane1.setViewportView(jTableProducto);
 
         jLabel2.setText("Escriba los primeros caracteres:");
 
+        jTBuscarPorNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTBuscarPorNombreKeyReleased(evt);
+            }
+        });
+
         jButton1.setText("Nuevo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Salir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,15 +143,38 @@ public class VistasListaDeProducto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRBPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBPorNombreActionPerformed
-        // TODO add your handling code here:
+        jRBTodos.setEnabled(false);
+        jTBuscarPorNombre.setEnabled(true);
     }//GEN-LAST:event_jRBPorNombreActionPerformed
 
     private void jRBTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTodosActionPerformed
         jRBPorNombre.setEnabled(false);
         jTBuscarPorNombre.setEnabled(false);
-        
+        cargarTodos();
                 
     }//GEN-LAST:event_jRBTodosActionPerformed
+
+    private void jTBuscarPorNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTBuscarPorNombreKeyReleased
+        borrarFilas();
+        ProductoData pd= new ProductoData();
+        ArrayList<Producto> lista= new ArrayList<>();
+        lista= pd.listarProductos();
+        for(Producto prod: lista){
+            if(prod.getNombre().startsWith(jTBuscarPorNombre.getText())){
+                modelo.addRow(new Object[]{prod.getNombre(), prod.getIdProducto(), prod.getPrecio(), prod.getCantidad()});
+            }
+        }
+    }//GEN-LAST:event_jTBuscarPorNombreKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        borrarFilas();
+        jRBPorNombre.setEnabled(true);
+        jRBTodos.setEnabled(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -163,7 +203,7 @@ public void armarCabecera(){
     }
     
     public void cargarTodos(){
-        borrarFilas();
+       
         ProductoData pd= new ProductoData();
         ArrayList<Producto> lista= new ArrayList<>();
         lista= pd.listarProductos();
@@ -172,5 +212,7 @@ public void armarCabecera(){
             modelo.addRow(new Object[]{pr.getNombre(), pr.getIdProducto(), pr.getPrecio(), pr.getCantidad()});
         }
     }
+    
+    
             
 }
