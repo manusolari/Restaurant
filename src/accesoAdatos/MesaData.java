@@ -123,14 +123,14 @@ public class MesaData {
         
     }
     
-    public void cambiarCapacidad(int id, int cap){
+    public void cambiarCapacidad(int num, int cap){
         
-        String sql = "UPDATE mesa SET capacidad = ? WHERE idMesa = ?";
+        String sql = "UPDATE mesa SET capacidad = ? WHERE numeroMesa = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, cap);
-            ps.setInt(2, id);
+            ps.setInt(2, buscarMesaPorNumero(num).getNumeroMesa());
             int exito = ps.executeUpdate();
             if(exito == 1){
                 JOptionPane.showMessageDialog(null, "Se cambió la capacidad de la mesa");

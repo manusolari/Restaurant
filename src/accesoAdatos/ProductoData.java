@@ -17,7 +17,7 @@ public class ProductoData {
 
     public void agregarProducto(Producto p) {
         String sql = " INSERT INTO producto ( nombre , cantidad , precio, estado ) "
-                + "VALUES ( ? , ? , ?, ? ) ";
+                + " VALUES ( ? , ? , ?, ? ) ";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
@@ -37,16 +37,17 @@ public class ProductoData {
     }
 
     public void modificarProducto(Producto p) {
-        String sql = "UPDATE `producto` SET "
-                + " idProducto = ? , nombre = ? , cantidad = ? , precio = ? , estado = ? ";
+        String sql = " UPDATE producto SET "
+                + " nombre = ? , cantidad = ? , precio = ? , estado = ?  WHERE idProducto = ? ";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, p.getIdProducto());
-            ps.setString(2, p.getNombre());
-            ps.setInt(3, p.getCantidad());
-            ps.setDouble(4, p.getPrecio());
-            ps.setBoolean(5, p.isEstado());
+           
+            ps.setString(1, p.getNombre());
+            ps.setInt(2, p.getCantidad());
+            ps.setDouble(3, p.getPrecio());
+            ps.setBoolean(4, p.isEstado());
+             ps.setInt(5, p.getIdProducto());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {

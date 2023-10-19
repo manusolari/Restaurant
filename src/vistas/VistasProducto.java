@@ -4,6 +4,10 @@
  */
 package vistas;
 
+import accesoAdatos.ProductoData;
+import entidades.Producto;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author EXO
@@ -13,6 +17,9 @@ public class VistasProducto extends javax.swing.JInternalFrame {
     /**
      * Creates new form VistasProducto
      */
+    private Producto p = new Producto();
+    private  ProductoData pd = new ProductoData(); 
+            
     public VistasProducto() {
         initComponents();
     }
@@ -27,6 +34,15 @@ public class VistasProducto extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jtNombre = new javax.swing.JTextField();
+        jtCantidad = new javax.swing.JTextField();
+        jtPrecio = new javax.swing.JTextField();
+        jbGuardar = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -39,31 +55,129 @@ public class VistasProducto extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Nombre : ");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Precio : ");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Cantidad : ");
+
+        jtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtNombreActionPerformed(evt);
+            }
+        });
+        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtNombreKeyTyped(evt);
+            }
+        });
+
+        jtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtCantidadKeyTyped(evt);
+            }
+        });
+
+        jtPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtPrecioActionPerformed(evt);
+            }
+        });
+        jtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtPrecioKeyTyped(evt);
+            }
+        });
+
+        jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
+
+        jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(jbGuardar)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(3, 3, 3)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(148, 148, 148)
+                                        .addComponent(jbEliminar))))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
+                        .addGap(211, 211, 211)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(159, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(36, 36, 36))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(jLabel1))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(96, 96, 96)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbGuardar)
+                    .addComponent(jbEliminar))
+                .addGap(9, 9, 9)
                 .addComponent(jButton1)
                 .addGap(19, 19, 19))
         );
@@ -75,10 +189,137 @@ public class VistasProducto extends javax.swing.JInternalFrame {
        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtNombreActionPerformed
+
+    private void jtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtPrecioActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+       try{
+        String nombre = jtNombre.getText();
+        if (nombre.isEmpty()){
+        JOptionPane.showMessageDialog(this, "Alguno de los campos esta Vacio");
+        return; 
+        }
+         
+        int id = pd.buscarProductoXnombre(nombre);
+        p = pd.buscarProductoPorId(id);
+        if(p.isEstado()){
+        jtCantidad.setText(String.valueOf(p.getCantidad()));
+        jtPrecio.setText(String.valueOf(p.getPrecio()));
+        pd.eliminarProducto(jtNombre.getText());
+        Limpiar();
+        }else{
+         JOptionPane.showMessageDialog(this, "El Producto ya esta eliminado");
+        }
+       }
+       catch (NumberFormatException nfe){
+       JOptionPane.showMessageDialog(this, "Alguno de los campos esta Vacio");
+       }
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+       try {
+       
+       
+        String nombre = (jtNombre.getText());
+        if (nombre.isEmpty()){
+        JOptionPane.showMessageDialog(this, "Alguno de los campos esta Vacio");
+        return;
+        }
+        int cantidad = (Integer.parseInt(jtCantidad.getText()));
+        double precio = (Double.parseDouble(jtPrecio.getText()));
+        boolean estado = (true);
+       int id = pd.buscarProductoXnombre(nombre);
+          p = pd.buscarProductoPorId(id);
+          if(id == 0){
+           p = null;
+                   }
+          if(p != null){
+       p.setNombre(jtNombre.getText());
+       p.setCantidad(cantidad);
+       p.setPrecio(precio);
+       p.setEstado(estado);
+       pd.modificarProducto(p);
+       
+          Limpiar();
+          }else {
+       p = new Producto();
+       p.setNombre(jtNombre.getText());
+              System.out.println(p);   
+       p.setCantidad(cantidad);
+       p.setPrecio(precio);
+          
+       p.setEstado(estado);
+          pd.agregarProducto(p);
+              System.out.println(p);
+          Limpiar();
+       
+       
+          }
+       }catch (NumberFormatException nfe){
+       JOptionPane.showMessageDialog(this, "Alguno de los campos esta Vacio");
+       }
+        
+        
+        
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyTyped
+        char letra = evt.getKeyChar();
+     if (Character.isDigit(letra)){
+         evt.consume();
+     }
+    }//GEN-LAST:event_jtNombreKeyTyped
+
+    private void jtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCantidadKeyTyped
+         char letra = evt.getKeyChar();
+     if (!Character.isDigit(letra)){
+         evt.consume();}
+    }//GEN-LAST:event_jtCantidadKeyTyped
+
+    private void jtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPrecioKeyTyped
+        char letra = evt.getKeyChar();
+     if (!Character.isDigit(letra)){
+         evt.consume();}
+    }//GEN-LAST:event_jtPrecioKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbGuardar;
+    private javax.swing.JTextField jtCantidad;
+    private javax.swing.JTextField jtNombre;
+    private javax.swing.JTextField jtPrecio;
     // End of variables declaration//GEN-END:variables
+
+    public void Limpiar(){
+    
+        jtNombre.setText(null);
+        jtCantidad.setText(null);
+        jtPrecio.setText(null);
+        p= null;
+
 }
+
+}
+/*
+try{
+        btnAnularInscripcion.setEnabled(true);
+       btnInscribirse.setEnabled(false);
+        cargarCursadas();
+        }catch(NullPointerException e){
+        JOptionPane.showMessageDialog(null, "No se encontraron datos");
+        }
+    }        
+*/
