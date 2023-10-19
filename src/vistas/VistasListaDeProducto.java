@@ -4,17 +4,25 @@
  */
 package vistas;
 
+import accesoAdatos.ProductoData;
+import entidades.Producto;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author EXO
  */
 public class VistasListaDeProducto extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form VistasListaDeProducto
-     */
+    private DefaultTableModel modelo= new DefaultTableModel();
+    public boolean isCellEditable(int f, int c){
+        return false;
+    }
+   
     public VistasListaDeProducto() {
         initComponents();
+        armarCabecera();
     }
 
     /**
@@ -25,42 +33,144 @@ public class VistasListaDeProducto extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jRBTodos = new javax.swing.JRadioButton();
+        jRBPorNombre = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableProducto = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        jTBuscarPorNombre = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Lista de Productos");
 
+        jRBTodos.setText("Todos ");
+        jRBTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBTodosActionPerformed(evt);
+            }
+        });
+
+        jRBPorNombre.setText("Por Nombre");
+        jRBPorNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBPorNombreActionPerformed(evt);
+            }
+        });
+
+        jTableProducto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableProducto);
+
         jLabel2.setText("Escriba los primeros caracteres:");
+
+        jButton1.setText("Nuevo");
+
+        jButton2.setText("Salir");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(62, 62, 62)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2)))
-                .addContainerGap(123, Short.MAX_VALUE))
+                        .addComponent(jTBuscarPorNombre))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jRBTodos)
+                                .addGap(186, 186, 186)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jRBPorNombre))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRBTodos)
+                    .addComponent(jRBPorNombre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTBuscarPorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
-                .addComponent(jLabel2)
-                .addGap(0, 196, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(13, 13, 13))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jRBPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBPorNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRBPorNombreActionPerformed
+
+    private void jRBTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTodosActionPerformed
+        jRBPorNombre.setEnabled(false);
+        jTBuscarPorNombre.setEnabled(false);
+        
+                
+    }//GEN-LAST:event_jRBTodosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JRadioButton jRBPorNombre;
+    private javax.swing.JRadioButton jRBTodos;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTBuscarPorNombre;
+    private javax.swing.JTable jTableProducto;
     // End of variables declaration//GEN-END:variables
+public void armarCabecera(){
+        modelo.addColumn("Nombre");
+        modelo.addColumn("IdProducto");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Stock");
+        jTableProducto.setModel(modelo);
+    }
+    public void borrarFilas(){
+        int f= jTableProducto.getRowCount()-1;
+        for (;f>=0;f--){
+            modelo.removeRow(f);
+        }
+    }
+    
+    public void cargarTodos(){
+        borrarFilas();
+        ProductoData pd= new ProductoData();
+        ArrayList<Producto> lista= new ArrayList<>();
+        lista= pd.listarProductos();
+        
+        for(Producto pr: lista){
+            modelo.addRow(new Object[]{pr.getNombre(), pr.getIdProducto(), pr.getPrecio(), pr.getCantidad()});
+        }
+    }
+            
 }
