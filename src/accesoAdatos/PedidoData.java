@@ -261,7 +261,7 @@ public class PedidoData {
                 p.setIdPedido(rs.getInt("idPedido"));
                 p.setMesa(md.buscarMesaPorId(rs.getInt("idMesa")));
                 p.setImporte(rs.getDouble("importe"));
-                p.setCobrada(true);
+                p.setCobrada(false);
                 p.setFechaHora(rs.getDate("fecha_hora").toLocalDate());
                 p.setNombreMesero(rs.getString("nombreMesero"));
                 lista.add(p);

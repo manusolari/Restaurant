@@ -200,6 +200,7 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
         else if(jComboBox.getSelectedItem()=="Pedidos por cobrar"){
            lista= pd.buscarPedidosPorCobrar();
            for(Pedido p: lista){
+               System.out.println(p);
                modelo.addRow(new Object [] {p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), p.isCobrada(), p.getFechaHora(), p.getNombreMesero()});
            }   
        }
