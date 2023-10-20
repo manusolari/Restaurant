@@ -27,25 +27,22 @@ public class PedidoData {
     }
 
     public void iniciarPedido(Pedido p) {
-        Mesa m= new Mesa();
+        Mesa m = new Mesa();
         String sql = "INSERT INTO pedido( idMesa, fecha_hora , nombreMesero, importe , cobrada) VALUES (?, ?, ? , 0 , 0)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            m=md.buscarMesaPorNumero(p.getMesa().getNumeroMesa());
+            m = md.buscarMesaPorNumero(p.getMesa().getNumeroMesa());
             ps.setInt(1, m.getIdMesa());
             ps.setDate(2, Date.valueOf(p.getFechaHora()));
-            ps.setString(3, p.getNombreMesero());           
-           ps.executeUpdate();
-           ResultSet rs = ps.getGeneratedKeys();
-           if (rs.next()) {
+            ps.setString(3, p.getNombreMesero());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Pedido iniciado con exito");
-               p.setIdPedido(rs.getInt(1));
+                p.setIdPedido(rs.getInt(1));
                 md.ocuparMesa(m.getIdMesa());
             }
-        
-                
-            
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede conectar a la tabla Pedido");
@@ -56,7 +53,7 @@ public class PedidoData {
         String sql = "SELECT p.precio, p.nombre , pp.cantidad, pp.idProducto FROM pedido_producto AS pp, producto AS p "
                 + "WHERE pp.IdPedido= ? AND p.idProducto= pp.idProducto";
         double total = 0;
-        
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idPedido);
@@ -96,10 +93,10 @@ public class PedidoData {
 
     public void cobrarPedido(Pedido p) {
         String sql = "UPDATE pedido SET cobrada= 1 WHERE idPedido = ? ";
-        Mesa m= new Mesa();
+        Mesa m = new Mesa();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            m=md.buscarMesaPorNumero(p.getMesa().getNumeroMesa());
+            m = md.buscarMesaPorNumero(p.getMesa().getNumeroMesa());
             ps.setInt(1, p.getIdPedido());
             int exito = ps.executeUpdate();
             if (exito == 1) {
@@ -111,119 +108,115 @@ public class PedidoData {
             JOptionPane.showMessageDialog(null, "No se puede conectar a la tabla Pedido");
         }
     }
-    
-    public ArrayList <Pedido> listaXMesero(String nombre){
-        ArrayList <Pedido> listaxMesero = new ArrayList <>();
-       
-        String sql = " SELECT idPedido, idMesa, importe, cobrada, fecha_hora, nombreMesero  FROM pedido WHERE 1 " ;
+
+    public ArrayList<Pedido> listaXMesero(String nombre) {
+        ArrayList<Pedido> listaxMesero = new ArrayList<>();
+
+        String sql = " SELECT idPedido, idMesa, importe, cobrada, fecha_hora, nombreMesero  FROM pedido WHERE 1 ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-                 Mesa m = new Mesa();
+            while (rs.next()) {
+                Mesa m = new Mesa();
                 Pedido p = new Pedido();
-            p.setIdPedido(rs.getInt("idPedido"));
-            int idmesa = (rs.getInt("idMesa"));
-            m.setIdMesa(idmesa);
-            p.setMesa(m);
-            p.setImporte(rs.getDouble("importe"));
-            p.setCobrada(rs.getBoolean("cobrada"));
-            p.setFechaHora(rs.getDate("fecha_hora").toLocalDate());
-            p.setNombreMesero(rs.getString("nombreMesero"));
-            
-            listaxMesero.add(p);
-                    }
-    
-        
-        
+                p.setIdPedido(rs.getInt("idPedido"));
+                int idmesa = (rs.getInt("idMesa"));
+                m.setIdMesa(idmesa);
+                p.setMesa(m);
+                p.setImporte(rs.getDouble("importe"));
+                p.setCobrada(rs.getBoolean("cobrada"));
+                p.setFechaHora(rs.getDate("fecha_hora").toLocalDate());
+                p.setNombreMesero(rs.getString("nombreMesero"));
+
+                listaxMesero.add(p);
+            }
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede conectar a la tabla Pedido");
         }
         return listaxMesero;
-    } 
-    
-    public ArrayList <Pedido> listarPedidosXFecha (LocalDate fecha1, LocalDate fecha2){
-         ArrayList <Pedido> listaFecha = new ArrayList <>();
+    }
+
+    public ArrayList<Pedido> listarPedidosXFecha(LocalDate fecha1, LocalDate fecha2) {
+        ArrayList<Pedido> listaFecha = new ArrayList<>();
         String sql = "SELECT * FROM `pedido` WHERE fecha_hora BETWEEN ? and ? ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDate(1, Date.valueOf(fecha1));
             ps.setDate(1, Date.valueOf(fecha2));
-            ResultSet rs =  ps.executeQuery();
-            
-            while(rs.next()){
-             Mesa m = new Mesa();
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Mesa m = new Mesa();
                 Pedido p = new Pedido();
-            p.setIdPedido(rs.getInt("idPedido"));
-            int idmesa = (rs.getInt("idMesa"));
-            m.setIdMesa(idmesa);
-            p.setMesa(m);
-            p.setImporte(rs.getDouble("importe"));
-            p.setCobrada(rs.getBoolean("cobrada"));
-            p.setFechaHora(rs.getDate("fecha_hora").toLocalDate());
-            p.setNombreMesero(rs.getString("nombreMesero"));
-            
-            listaFecha.add(p);
+                p.setIdPedido(rs.getInt("idPedido"));
+                int idmesa = (rs.getInt("idMesa"));
+                m.setIdMesa(idmesa);
+                p.setMesa(m);
+                p.setImporte(rs.getDouble("importe"));
+                p.setCobrada(rs.getBoolean("cobrada"));
+                p.setFechaHora(rs.getDate("fecha_hora").toLocalDate());
+                p.setNombreMesero(rs.getString("nombreMesero"));
+
+                listaFecha.add(p);
             }
-        
+
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "No se puede conectar a la tabla Pedido");
+            JOptionPane.showMessageDialog(null, "No se puede conectar a la tabla Pedido");
         }
-        return listaFecha; 
+        return listaFecha;
     }
-    
-     //Listar ingresos sumando totales de pedidos para una fecha en particular.
+
+    //Listar ingresos sumando totales de pedidos para una fecha en particular.
 //        public double listarImporteXfecha(LocalDate fecha1){
 //        
 //        
 //        }
-    
-    public int pedidoXIdMesa(Mesa m){
-    int id = 0;
-    String sql = " SELECT pedido.* FROM pedido JOIN mesa ON(pedido.idMesa = mesa.idMesa) "
-            + " WHERE pedido.idMesa = ? AND mesa.estado = 0 " ;
-    PreparedStatement ps;
+    public int pedidoXIdMesa(Mesa m) {
+        int id = 0;
+        String sql = " SELECT pedido.* FROM pedido JOIN mesa ON(pedido.idMesa = mesa.idMesa) "
+                + " WHERE pedido.idMesa = ? AND mesa.estado = 0 ";
+        PreparedStatement ps;
         try {
             ps = con.prepareStatement(sql);
-            
+
             m = md.buscarMesaPorNumero(m.getNumeroMesa());
-            
+
             ps.setInt(1, m.getIdMesa());
             ResultSet rs = ps.executeQuery();
             //System.out.println(rs.isFirst());
-           
-           
-             if  (rs.next()){
-                
-                 id = rs.getInt(1);
-                 
-             }
-        }catch (NullPointerException nfe){
-                    JOptionPane.showMessageDialog(null, "Hubo un error al Ingresar la informacion de Mesa, Por favor compruebe la informacion");
-                    } 
-        catch (SQLException ex) {
-            
+
+            if (rs.next()) {
+
+                id = rs.getInt(1);
+
+            }
+        } catch (NullPointerException nfe) {
+            JOptionPane.showMessageDialog(null, "Hubo un error al Ingresar la informacion de Mesa, Por favor compruebe la informacion");
+        } catch (SQLException ex) {
+
             JOptionPane.showMessageDialog(null, "No se puede conectar a la tabla Pedido");
         }
-           
-    return id;
+
+        return id;
     }
-    public Pedido buscarPedidoXid(int idPedido){
-        Pedido p= new Pedido();
-        
-        String sql="SELECT * FROM pedido WHERE idPedido = ?";
+
+    public Pedido buscarPedidoXid(int idPedido) {
+        Pedido p = new Pedido();
+
+        String sql = "SELECT * FROM pedido WHERE idPedido = ?";
         try {
-            PreparedStatement ps= con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idPedido);
-            ResultSet rs= ps.executeQuery();
-            if(rs.next()){
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
                 p.setIdPedido(idPedido);
                 p.setMesa(md.buscarMesaPorId(rs.getInt("idMesa")));
                 p.setImporte(rs.getDouble("importe"));
                 p.setCobrada(rs.getBoolean("cobrada"));
                 p.setFechaHora(rs.getDate("fecha_hora").toLocalDate());
                 p.setNombreMesero(rs.getString("nombreMesero"));
-                
+
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede conectar a la tabla Pedido");
@@ -231,8 +224,52 @@ public class PedidoData {
         return p;
     }
 
+    public ArrayList<Pedido> buscarPedidosCobrados() {
+        String sql = "SELECT * FROM pedido WHERE cobrada = 1";
+        ArrayList<Pedido> lista = new ArrayList<>();
 
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Pedido p = new Pedido();
+                p.setIdPedido(rs.getInt("idPedido"));
+                p.setMesa(md.buscarMesaPorId(rs.getInt("idMesa")));
+                p.setImporte(rs.getDouble("importe"));
+                p.setCobrada(true);
+                p.setFechaHora(rs.getDate("fecha_hora").toLocalDate());
+                p.setNombreMesero(rs.getString("nombreMesero"));
+                lista.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PedidoData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
     
+    public ArrayList<Pedido> buscarPedidosPorCobrar() {
+        String sql = "SELECT * FROM pedido WHERE cobrada = 0";
+        ArrayList<Pedido> lista = new ArrayList<>();
 
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Pedido p = new Pedido();
+                p.setIdPedido(rs.getInt("idPedido"));
+                p.setMesa(md.buscarMesaPorId(rs.getInt("idMesa")));
+                p.setImporte(rs.getDouble("importe"));
+                p.setCobrada(true);
+                p.setFechaHora(rs.getDate("fecha_hora").toLocalDate());
+                p.setNombreMesero(rs.getString("nombreMesero"));
+                lista.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PedidoData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
 
 }

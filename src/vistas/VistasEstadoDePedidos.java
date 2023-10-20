@@ -4,17 +4,30 @@
  */
 package vistas;
 
+import accesoAdatos.PedidoData;
+import entidades.Pedido;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author EXO
  */
 public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form VistasEstadoDePedidos
-     */
+     private DefaultTableModel modelo= new DefaultTableModel();
+    public boolean isCellEditable(int f, int c){
+        return false;
+    }
+    PedidoData pd= new PedidoData();
     public VistasEstadoDePedidos() {
         initComponents();
+        armarCabecera();
+       jLNumeroDeMesa.setVisible(false);
+       jTBuscarPedidoPorMesa.setVisible(false);
+       jLNombreMesero.setVisible(false);
+       jTNombreMesero.setVisible(false);
+       
     }
 
     /**
@@ -24,21 +37,222 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTablePedidos = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox = new javax.swing.JComboBox<>();
+        jTBuscarPedidoPorMesa = new javax.swing.JTextField();
+        jLNumeroDeMesa = new javax.swing.JLabel();
+        jTNombreMesero = new javax.swing.JTextField();
+        jLNombreMesero = new javax.swing.JLabel();
+
+        jMenu1.setText("jMenu1");
+
+        jMenu2.setText("jMenu2");
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenu3.setText("jMenu3");
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Estado de Pedidos");
+
+        jTablePedidos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTablePedidos);
+
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Nueva Consulta");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Que consulta dese hacer:");
+
+        jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Pedidos Cobrados", "Pedidos por cobrar", "Buscar pedido por mesa", "Buscar pedido por Mesero" }));
+        jComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxActionPerformed(evt);
+            }
+        });
+
+        jTBuscarPedidoPorMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTBuscarPedidoPorMesaActionPerformed(evt);
+            }
+        });
+
+        jLNumeroDeMesa.setText("Ingrese el numero de mesa:");
+
+        jTNombreMesero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTNombreMeseroActionPerformed(evt);
+            }
+        });
+
+        jLNombreMesero.setText("Ingrese el nombre del mesero");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLNombreMesero)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLNumeroDeMesa))
+                                .addGap(62, 62, 62)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTBuscarPedidoPorMesa)
+                                    .addComponent(jTNombreMesero)
+                                    .addComponent(jComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(241, 241, 241)
+                        .addComponent(jLabel1)))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTBuscarPedidoPorMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLNumeroDeMesa))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTNombreMesero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLNombreMesero))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addGap(19, 19, 19))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTBuscarPedidoPorMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBuscarPedidoPorMesaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTBuscarPedidoPorMesaActionPerformed
+
+    private void jTNombreMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTNombreMeseroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTNombreMeseroActionPerformed
+
+    private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
+        borrarFilas();
+        ArrayList<Pedido> lista= new ArrayList<>();
+        if(jComboBox.getSelectedItem()=="Pedidos Cobrados"){
+           lista= pd.buscarPedidosCobrados();
+           for(Pedido p: lista){
+               modelo.addRow(new Object [] {p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), p.isCobrada(), p.getFechaHora(), p.getNombreMesero()});
+           }
+        }
+        else if(jComboBox.getSelectedItem()=="Pedidos por cobrar"){
+           lista= pd.buscarPedidosPorCobrar();
+           for(Pedido p: lista){
+               modelo.addRow(new Object [] {p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), p.isCobrada(), p.getFechaHora(), p.getNombreMesero()});
+           }   
+       }
+        ///No se si agregar estos campos???
+//        else if (jComboBox.getSelectedItem()=="Buscar pedido por mesa"){
+//            
+//        }
+    }//GEN-LAST:event_jComboBoxActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        borrarFilas();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JComboBox<String> jComboBox;
+    private javax.swing.JLabel jLNombreMesero;
+    private javax.swing.JLabel jLNumeroDeMesa;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTBuscarPedidoPorMesa;
+    private javax.swing.JTextField jTNombreMesero;
+    private javax.swing.JTable jTablePedidos;
     // End of variables declaration//GEN-END:variables
+
+    public void armarCabecera(){
+        modelo.addColumn("IdPedido");
+        modelo.addColumn("IdMesa");
+        modelo.addColumn("Importe");
+        modelo.addColumn("Cobrada");
+        modelo.addColumn("fecha_hora");
+        modelo.addColumn("nombreMesero");
+        jTablePedidos.setModel(modelo);
+    }
+    public void borrarFilas(){
+        int f= jTablePedidos.getRowCount()-1;
+        for (;f>=0;f--){
+            modelo.removeRow(f);
+        }
+    }
+    
+  
 }
