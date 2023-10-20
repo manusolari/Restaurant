@@ -272,4 +272,27 @@ public class PedidoData {
         return lista;
     }
 
+    public ArrayList<Pedido> listarPedido() {
+        String sql = "SELECT * FROM pedido ";
+        ArrayList<Pedido> lista = new ArrayList<>();
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Pedido p = new Pedido();
+                p.setIdPedido(rs.getInt("idPedido"));
+                p.setMesa(md.buscarMesaPorId(rs.getInt("idMesa")));
+                p.setImporte(rs.getDouble("importe"));
+                p.setCobrada(rs.getBoolean("cobrada"));
+                p.setFechaHora(rs.getDate("fecha_hora").toLocalDate());
+                p.setNombreMesero(rs.getString("nombreMesero"));
+                lista.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PedidoData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
 }
