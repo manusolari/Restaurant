@@ -75,8 +75,10 @@ PedidoProductoData ppd = new PedidoProductoData();
       //ppd.iniciarPedidoProducto(pdProd);
       //----------Prueba de listar pedidos por id-------------
         //System.out.println( ppd.listarPedidoProductoXPedido(7));
-        System.out.println(pd.listarProducto());
-        
+        //System.out.println(pd.listarProducto());
+        //System.out.println(mesa.buscarMesaPorNumero(8));
+        //System.out.println(mesa.buscarMesaPorId());
+        mesa.agregarMesa(m6);
     }
 
 }

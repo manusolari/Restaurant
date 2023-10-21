@@ -83,13 +83,16 @@ public class MesaData {
     }
 
     public void agregarMesa(Mesa mesa) {
-
+        Mesa m = buscarMesaPorNumero(mesa.getNumeroMesa());
         String sql = "INSERT INTO mesa( numeroMesa, capacidad, estado) VALUES (  ? , ?, ? )";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS);
 
-            
+            if(m.getNumeroMesa() > 0){
+               JOptionPane.showMessageDialog(null, "La mesa con ese número ya existe"); 
+               return;
+            }
             ps.setInt(1, mesa.getNumeroMesa());
             ps.setInt(2, mesa.getCapacidad());
             ps.setBoolean(3, true);
@@ -105,16 +108,16 @@ public class MesaData {
         }
     }
     
-    public void quitarMesa(int id){
+    public void quitarMesa(int numMesa){
         
-        String sql = "UPDATE mesa SET estado = 0 WHERE idMesa = ?";
+        String sql = "UPDATE mesa SET estado = 0 WHERE numeroMesa = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, numMesa);
              int exito = ps.executeUpdate();
              if(exito == 1){
-                 JOptionPane.showMessageDialog(null, "Se eliminó una mesa");
+                 JOptionPane.showMessageDialog(null, "Se dió de baja la mesa");
              }
             
         } catch (SQLException ex) {
