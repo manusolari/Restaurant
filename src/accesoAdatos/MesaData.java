@@ -90,7 +90,7 @@ public class MesaData {
             PreparedStatement ps = con.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS);
 
             if(m.getNumeroMesa() > 0){
-               JOptionPane.showMessageDialog(null, "La mesa con ese número ya existe"); 
+               JOptionPane.showMessageDialog(null, "La mesa con ese número ya existe, presione actualizar si quiere cambiar la capacidad"); 
                return;
             }
             ps.setInt(1, mesa.getNumeroMesa());
