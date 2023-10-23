@@ -10,6 +10,7 @@ import entidades.Mesa;
 import entidades.Pedido;
 import java.util.ArrayList;
 import java.util.HashSet;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -53,7 +54,6 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePedidos = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jRBPedidosCobrados = new javax.swing.JRadioButton();
         jRBPedidosXcobrar = new javax.swing.JRadioButton();
         jRBnumMesa = new javax.swing.JRadioButton();
@@ -95,13 +95,6 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Nueva Consulta");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         Grupo1.add(jRBPedidosCobrados);
         jRBPedidosCobrados.setText("Pedidos Cobrados");
         jRBPedidosCobrados.addActionListener(new java.awt.event.ActionListener() {
@@ -118,8 +111,10 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
             }
         });
 
+        Grupo2.add(jRBnumMesa);
         jRBnumMesa.setText("Buscar por numero de Mesa");
 
+        Grupo2.add(jRBMesero);
         jRBMesero.setText("Buscar nombre de Mesero");
 
         jCBMesa.addActionListener(new java.awt.event.ActionListener() {
@@ -143,11 +138,8 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jButton2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton1))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
@@ -191,18 +183,12 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                .addComponent(jButton1)
                 .addGap(19, 19, 19))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        borrarFilas();
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);
@@ -228,6 +214,7 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRBPedidosXcobrarActionPerformed
 
     private void jCBMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBMesaActionPerformed
+        try{
         Mesa ms = (Mesa) jCBMesa.getSelectedItem();
         int numeroMesa= ms.getNumeroMesa();
         if(jRBnumMesa.isSelected()){
@@ -255,21 +242,24 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
                 }
             }
         }
+        }catch(NullPointerException nc){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una mesa");
+        }
     }//GEN-LAST:event_jCBMesaActionPerformed
 
     private void jCBMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBMeseroActionPerformed
+        try{
         String mozoS =  (String) jCBMesero.getSelectedItem();
-        System.out.println(mozoS);
+           
         if(jRBMesero.isSelected()){
             if (jRBPedidosCobrados.isSelected()) {
                 borrarFilas();
                 ArrayList<Pedido> lista = new ArrayList<>();
                 lista = pd.buscarPedidosCobrados();
-
                 for (Pedido p : lista) {
-
-                    if (mozoS == p.getNombreMesero()) {
-                 modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), p.isCobrada(), p.getFechaHora(), p.getNombreMesero()});   
+                    
+                    if (mozoS == p.getNombreMesero()) {     
+                    modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), p.isCobrada(), p.getFechaHora(), p.getNombreMesero()});   
                     }
                 }
             }
@@ -278,12 +268,15 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
                 ArrayList<Pedido> listaXcobrar = new ArrayList<>();
                 listaXcobrar = pd.buscarPedidosPorCobrar();
                 for (Pedido p : listaXcobrar) {
-
-                    if (mozoS == p.getNombreMesero()) {
-                 modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), p.isCobrada(), p.getFechaHora(), p.getNombreMesero()});   
+                    if (mozoS.equals(p.getNombreMesero())) {
+                    modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), p.isCobrada(), p.getFechaHora(), p.getNombreMesero()});   
                     }
                 }
             }
+        }
+        }catch(NullPointerException nc){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un mesero");
+            
         }
     }//GEN-LAST:event_jCBMeseroActionPerformed
 
@@ -292,7 +285,6 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup Grupo1;
     private javax.swing.ButtonGroup Grupo2;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<Mesa> jCBMesa;
     private javax.swing.JComboBox<String> jCBMesero;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
