@@ -26,6 +26,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         dpPanel = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmProductos = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -56,14 +57,18 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         dpPanel.setLayout(dpPanelLayout);
         dpPanelLayout.setHorizontalGroup(
             dpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         dpPanelLayout.setVerticalGroup(
             dpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 466, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/fono ancho.jpg"))); // NOI18N
+
+        jmProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/blanco 1.png"))); // NOI18N
         jmProductos.setText("Administracion");
+        jmProductos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jmProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmProductosActionPerformed(evt);
@@ -88,7 +93,9 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jmProductos);
 
+        jmEstadosP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/blanco 1.png"))); // NOI18N
         jmEstadosP.setText("Consultas");
+        jmEstadosP.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jmEstadoP.setText("Estado de Pedidos");
         jmEstadoP.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +131,9 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jmEstadosP);
 
+        jmIniciarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/blanco 1.png"))); // NOI18N
         jmIniciarP.setText("Gestion");
+        jmIniciarP.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jmIniciarPed.setText("Iniciar Pedido");
         jmIniciarPed.addActionListener(new java.awt.event.ActionListener() {
@@ -150,15 +159,18 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(dpPanel))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(dpPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(dpPanel)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(dpPanel))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -285,6 +297,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane dpPanel;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jmDisponibilidad;
