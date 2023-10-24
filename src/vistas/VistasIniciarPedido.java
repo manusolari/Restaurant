@@ -4,10 +4,6 @@
  */
 package vistas;
 
-
-import entidades.Mesa;
-import entidades.Producto;
-
 import accesoAdatos.MesaData;
 import accesoAdatos.PedidoData;
 import accesoAdatos.PedidoProductoData;
@@ -19,7 +15,6 @@ import entidades.Producto;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-
 
 /**
  *
