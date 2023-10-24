@@ -164,6 +164,8 @@ public class VistasListaDeProducto extends javax.swing.JInternalFrame {
         borrarFilas();
         jRBPorNombre.setEnabled(true);
         jRBTodos.setEnabled(true);
+        jRBPorNombre.setSelected(false);
+        jRBTodos.setSelected(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -197,7 +199,7 @@ public void armarCabecera(){
     }
     
     public void cargarTodos(){
-       
+       borrarFilas();
         ProductoData pd= new ProductoData();
         ArrayList<Producto> lista= new ArrayList<>();
         lista= pd.listarProductos();

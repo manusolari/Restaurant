@@ -4,6 +4,7 @@ package vistas;
 import accesoAdatos.PedidoData;
 import entidades.Pedido;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,6 +14,8 @@ public class VistasFacturacion extends javax.swing.JInternalFrame {
     /**
      * Creates new form VistasFacturacion
      */
+   private LocalDate fInicio = null;
+   private      LocalDate fFinal = null;
     private DefaultTableModel modelo = new DefaultTableModel();
     private PedidoData pd = new PedidoData();
     private Pedido p = new Pedido();
@@ -151,11 +154,19 @@ public class VistasFacturacion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
+             llenarTablaTodo();
+            activarBoton();
+            pd.listarPedido();
+            
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtBuscarActionPerformed
-        // TODO add your handling code here:
+      
+       fInicio = formatoFechaInicio() ;
+        fFinal = formatoFechaFinal();
+        llenarTabla();
+         fInicio = null;
+         fFinal = null;
     }//GEN-LAST:event_jtBuscarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -189,7 +200,7 @@ public class VistasFacturacion extends javax.swing.JInternalFrame {
         limpiarTabla();
         //InscripcionData data = new InscripcionData();
         //AlumnoData alu = new AlumnoData();
-        List<Pedido> listaF = pd.listarPedidosXFecha(LocalDate.MAX, LocalDate.MAX);
+        List<Pedido> listaF = pd.listarPedidosXFecha(fInicio, fFinal);
         for (Pedido pl : listaF) {
             modelo.addRow(new Object[]{pl.getIdPedido(), pl.getMesa().getNumeroMesa(),pd.buscarPedidoXid(pl.getIdPedido()),pl.getFechaHora(),pl.getNombreMesero()});
         }
@@ -200,5 +211,37 @@ public class VistasFacturacion extends javax.swing.JInternalFrame {
             modelo.removeRow(i);
         }
     }
+    private LocalDate formatoFechaFinal(){
+        if(calendarioFinal.getDate()!=null){
+            LocalDate fecha=calendarioFinal.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            return fecha;
+        }
+        return null;
+    }
     
-}
+     private LocalDate formatoFechaInicio(){
+        if(calendarioFinal.getDate()!=null){
+            LocalDate fecha=calendarioInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            return fecha;
+        }
+        return null;
+     }
+     private void activarBoton(){
+     if(jRadioButton1.isSelected()){
+         jtBuscar.setEnabled(false);
+     }else{
+           jtBuscar.setEnabled(true);       
+                 }
+     }
+         private void llenarTablaTodo() {
+        limpiarTabla();
+        //InscripcionData data = new InscripcionData();
+        //AlumnoData alu = new AlumnoData();
+        List<Pedido> listaTodo = pd.listarPedido();
+        for (Pedido pl : listaTodo) {
+            modelo.addRow(new Object[]{pl.getIdPedido(), pl.getMesa().getNumeroMesa(),pd.buscarPedidoXid(pl.getIdPedido()),pl.getFechaHora(),pl.getNombreMesero()});
+        }
+    }
+     
+     }
+

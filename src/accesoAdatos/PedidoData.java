@@ -143,7 +143,7 @@ public class PedidoData {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDate(1, Date.valueOf(fecha1));
-            ps.setDate(1, Date.valueOf(fecha2));
+            ps.setDate(2, Date.valueOf(fecha2));
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
