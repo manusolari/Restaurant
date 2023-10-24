@@ -56,11 +56,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         dpPanel.setLayout(dpPanelLayout);
         dpPanelLayout.setHorizontalGroup(
             dpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGap(0, 608, Short.MAX_VALUE)
         );
         dpPanelLayout.setVerticalGroup(
             dpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 466, Short.MAX_VALUE)
+            .addGap(0, 475, Short.MAX_VALUE)
         );
 
         jmProductos.setText("Administracion");
@@ -152,13 +152,15 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(dpPanel))
+                .addComponent(dpPanel)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(dpPanel))
+                .addComponent(dpPanel)
+                .addContainerGap())
         );
 
         pack();

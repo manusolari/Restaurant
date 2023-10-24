@@ -4,6 +4,9 @@
  */
 package vistas;
 
+import entidades.Mesa;
+import entidades.Producto;
+
 /**
  *
  * @author EXO
