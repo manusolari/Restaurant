@@ -66,9 +66,14 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/fono ancho.jpg"))); // NOI18N
 
+        jMenuBar1.setMaximumSize(new java.awt.Dimension(155, 32768));
+
         jmProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/blanco 1.png"))); // NOI18N
         jmProductos.setText("Administracion");
+        jmProductos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jmProductos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jmProductos.setMaximumSize(new java.awt.Dimension(130, 32769));
+        jmProductos.setPreferredSize(new java.awt.Dimension(146, 41));
         jmProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmProductosActionPerformed(evt);
@@ -95,7 +100,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         jmEstadosP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/blanco 1.png"))); // NOI18N
         jmEstadosP.setText("Consultas");
+        jmEstadosP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jmEstadosP.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jmEstadosP.setMargin(new java.awt.Insets(0, 6, 3, 6));
+        jmEstadosP.setMaximumSize(new java.awt.Dimension(136, 32773));
+        jmEstadosP.setPreferredSize(new java.awt.Dimension(146, 41));
 
         jmEstadoP.setText("Estado de Pedidos");
         jmEstadoP.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +142,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         jmIniciarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/blanco 1.png"))); // NOI18N
         jmIniciarP.setText("Gestion");
+        jmIniciarP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jmIniciarP.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jmIniciarP.setMaximumSize(new java.awt.Dimension(130, 32767));
+        jmIniciarP.setMinimumSize(new java.awt.Dimension(125, 41));
+        jmIniciarP.setPreferredSize(new java.awt.Dimension(125, 41));
 
         jmIniciarPed.setText("Iniciar Pedido");
         jmIniciarPed.addActionListener(new java.awt.event.ActionListener() {
