@@ -23,7 +23,7 @@ public class MesaData {
 
         ArrayList<Mesa> listaMesas = new ArrayList<>();
 
-        String sql = "SELECT idMesa, capacidad, estado FROM mesa WHERE estado = 1";
+        String sql = "SELECT idMesa, numeroMesa, capacidad, estado FROM mesa WHERE estado = 1";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -34,6 +34,7 @@ public class MesaData {
 
                 mesas.setCapacidad(rs.getInt("capacidad"));
                 mesas.setEstadoMesa(true);
+                mesas.setNumeroMesa(rs.getInt("numeroMesa"));
                 mesas.setIdMesa(rs.getInt("idMesa"));
 
                 listaMesas.add(mesas);
