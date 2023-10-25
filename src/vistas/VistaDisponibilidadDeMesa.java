@@ -205,7 +205,7 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
         radioMNoDisponible.setSelected(false);
         radioMTodas.setSelected(false);
         jtNumeroM.setEnabled(true);
-        jtNumeroM.setText("");
+        jtNumeroM.setText(" ");
         
 //        Mesa m;
 //        
