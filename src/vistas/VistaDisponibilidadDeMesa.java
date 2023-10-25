@@ -4,6 +4,16 @@
  */
 package vistas;
 
+import accesoAdatos.MesaData;
+import accesoAdatos.ProductoData;
+import entidades.Mesa;
+import entidades.Pedido;
+import entidades.Producto;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author EXO
@@ -13,8 +23,11 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
     /**
      * Creates new form VistaDisponibilidadDeMesa
      */
+    private MesaData md = new MesaData(); 
+    private DefaultTableModel modelo = new DefaultTableModel();
     public VistaDisponibilidadDeMesa() {
         initComponents();
+        modelarTabla();
     }
 
     /**
@@ -24,21 +37,306 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        GrupoMesas = new javax.swing.ButtonGroup();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtTablaM = new javax.swing.JTable();
+        radioMDisponible = new javax.swing.JRadioButton();
+        radioMNoDisponible = new javax.swing.JRadioButton();
+        radioMTodas = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        jtNumeroM = new javax.swing.JTextField();
+        botonActivarB = new javax.swing.JButton();
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Listas de Mesas");
+
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jtTablaM.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jtTablaM);
+
+        GrupoMesas.add(radioMDisponible);
+        radioMDisponible.setText("Mesas Disponibles");
+        radioMDisponible.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioMDisponibleActionPerformed(evt);
+            }
+        });
+
+        GrupoMesas.add(radioMNoDisponible);
+        radioMNoDisponible.setText("Mesas no Disponibles");
+        radioMNoDisponible.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioMNoDisponibleActionPerformed(evt);
+            }
+        });
+
+        GrupoMesas.add(radioMTodas);
+        radioMTodas.setText("Todas las Mesas");
+        radioMTodas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioMTodasActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Buscar Mesa por Numero :");
+
+        jtNumeroM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtNumeroMActionPerformed(evt);
+            }
+        });
+        jtNumeroM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtNumeroMKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtNumeroMKeyTyped(evt);
+            }
+        });
+
+        botonActivarB.setText("Activar Busqueda");
+        botonActivarB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonActivarBActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(23, 23, 23))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(radioMNoDisponible)
+                            .addComponent(radioMDisponible)
+                            .addComponent(radioMTodas)
+                            .addComponent(botonActivarB)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtNumeroM, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jtNumeroM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(radioMNoDisponible)
+                        .addGap(18, 18, 18)
+                        .addComponent(radioMDisponible)
+                        .addGap(18, 18, 18)
+                        .addComponent(radioMTodas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonActivarB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setVisible(false);
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void radioMNoDisponibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioMNoDisponibleActionPerformed
+        activarBoton();
+        llenarMesasOcupadas();
+    }//GEN-LAST:event_radioMNoDisponibleActionPerformed
+
+    private void radioMDisponibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioMDisponibleActionPerformed
+       activarBoton();
+       llenarMesasLibres();
+    }//GEN-LAST:event_radioMDisponibleActionPerformed
+
+    private void radioMTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioMTodasActionPerformed
+        activarBoton();
+        llenarMesasTodas();
+    }//GEN-LAST:event_radioMTodasActionPerformed
+
+    private void botonActivarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActivarBActionPerformed
+        limpiarTabla();
+        radioMDisponible.setSelected(false);
+        radioMNoDisponible.setSelected(false);
+        radioMTodas.setSelected(false);
+        jtNumeroM.setEnabled(true);
+        jtNumeroM.setText(" ");
+        
+//        Mesa m;
+//        
+//        m = md.buscarMesaPorNumero(Integer.parseInt(jtNumeroM.getText()));
+//        
+//        if (m.getNumeroMesa() == (Integer.parseInt(jtNumeroM.getText()))) {
+//            String estado;
+//            if (m.isEstadoMesa()) {
+//                estado = "Activo";
+//            } else {
+//                estado = "Inactivo";
+//            }
+//            modelo.addRow(new Object[]{m.getIdMesa(), m.getNumeroMesa(), m.getCapacidad(), estado});
+//        }
+//        
+           
+    }//GEN-LAST:event_botonActivarBActionPerformed
+
+    private void jtNumeroMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNumeroMKeyTyped
+         char letra = evt.getKeyChar();
+     if (!Character.isDigit(letra)){
+         evt.consume();}
+    }//GEN-LAST:event_jtNumeroMKeyTyped
+
+    private void jtNumeroMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNumeroMActionPerformed
+         
+    }//GEN-LAST:event_jtNumeroMActionPerformed
+
+    private void jtNumeroMKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNumeroMKeyReleased
+       Mesa m;
+        
+       try{
+        System.out.println(m = md.buscarMesaPorNumero(Integer.parseInt(jtNumeroM.getText())));
+        
+        if (m.getNumeroMesa() == (Integer.parseInt(jtNumeroM.getText()))) {
+            String estado;
+            if (m.isEstadoMesa()) {
+                estado = "Activo";
+            } else {
+                estado = "Inactivo";
+            }
+            modelo.addRow(new Object[]{m.getIdMesa(), m.getNumeroMesa(), m.getCapacidad(), estado});
+        }
+        } catch (NumberFormatException nfe){
+        JOptionPane.showMessageDialog(null, "Recuerde Eliminar los Espacios, solo Numeros");
+        }
+    }//GEN-LAST:event_jtNumeroMKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup GrupoMesas;
+    private javax.swing.JButton botonActivarB;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jtNumeroM;
+    private javax.swing.JTable jtTablaM;
+    private javax.swing.JRadioButton radioMDisponible;
+    private javax.swing.JRadioButton radioMNoDisponible;
+    private javax.swing.JRadioButton radioMTodas;
     // End of variables declaration//GEN-END:variables
+
+
+    public void limpiarTabla(){
+        int f= jtTablaM.getRowCount()-1;
+        for (;f>=0;f--){
+            modelo.removeRow(f);
+        }
+    }
+           public void modelarTabla(){
+  modelo.addColumn("ID Mesa");
+        modelo.addColumn("Numero de Mesa");
+        modelo.addColumn("Capacidad");
+        modelo.addColumn("Estado de Mesa");
+        jtTablaM.setModel(modelo);
+    }
+
+           private void llenarMesasTodas() {
+        limpiarTabla();
+        List<Mesa> listaTodas = md.listarMesas();
+        for (Mesa m : listaTodas) {
+        String estado;
+        if(m.isEstadoMesa()){
+        estado = "Activo";
+        }else{
+            estado = "Inactivo";
+        }
+            modelo.addRow(new Object[]{m.getIdMesa(),m.getNumeroMesa(),m.getCapacidad(),estado});
+        }
+    }
+
+             private void llenarMesasLibres() {
+        limpiarTabla();
+        List<Mesa> listaTodas = md.mesasLibres();
+        for (Mesa m : listaTodas) {
+         String estado;
+        if(m.isEstadoMesa()){
+        estado = "Activo";
+        }else{
+            estado = "Inactivo";
+        }
+            modelo.addRow(new Object[]{m.getIdMesa(),m.getNumeroMesa(),m.getCapacidad(),estado});
+        }
+    }
+           
+             private void llenarMesasOcupadas() {
+        limpiarTabla();
+        List<Mesa> listaTodas = md.mesasOcupadas();
+        for (Mesa m : listaTodas) {
+          String estado;
+        if(m.isEstadoMesa()){
+        estado = "Activo";
+        }else{
+            estado = "Inactivo";
+        }
+            modelo.addRow(new Object[]{m.getIdMesa(),m.getNumeroMesa(),m.getCapacidad(),estado});
+        }
+    }
+          private void activarBoton() {
+        if (radioMDisponible.isSelected()) {
+            jtNumeroM.setEnabled(false);
+        }
+        else if (radioMNoDisponible.isSelected()) {
+           jtNumeroM.setEnabled(false);
+        }
+        else if (radioMTodas.isSelected()) {
+            jtNumeroM.setEnabled(false);
+        } else {
+            jtNumeroM.setEnabled(true);
+        }
+    }
+
 }

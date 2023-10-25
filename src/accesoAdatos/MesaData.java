@@ -47,6 +47,34 @@ public class MesaData {
 
         return listaMesas;
     }
+    public ArrayList<Mesa> mesasOcupadas() {
+
+        ArrayList<Mesa> listaMesas = new ArrayList<>();
+
+        String sql = "SELECT idMesa, numeroMesa, capacidad, estado FROM mesa WHERE estado = 0";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Mesa mesas = new Mesa();
+
+                mesas.setCapacidad(rs.getInt("capacidad"));
+                mesas.setEstadoMesa(false);
+                mesas.setNumeroMesa(rs.getInt("numeroMesa"));
+                mesas.setIdMesa(rs.getInt("idMesa"));
+
+                listaMesas.add(mesas);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectarse a la tabla mesa");
+        }
+
+        return listaMesas;
+    }
 
     public void liberarMesa(int id) {
 
@@ -160,7 +188,7 @@ public class MesaData {
                 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(MesaData.class.getName()).log(Level.SEVERE, null, ex);
+          JOptionPane.showMessageDialog(null, "Error al conectar con la tabla mesa");
         }
         return lista;
     }

@@ -66,6 +66,11 @@ public class VistasListaDeProducto extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Escriba los primeros caracteres:");
 
+        jTBuscarPorNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTBuscarPorNombreActionPerformed(evt);
+            }
+        });
         jTBuscarPorNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTBuscarPorNombreKeyReleased(evt);
@@ -171,6 +176,10 @@ public class VistasListaDeProducto extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTBuscarPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBuscarPorNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTBuscarPorNombreActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
