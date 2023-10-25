@@ -56,11 +56,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         dpPanel.setLayout(dpPanelLayout);
         dpPanelLayout.setHorizontalGroup(
             dpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 611, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
         dpPanelLayout.setVerticalGroup(
             dpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 482, Short.MAX_VALUE)
+            .addGap(0, 488, Short.MAX_VALUE)
         );
 
         jMenuBar1.setMaximumSize(new java.awt.Dimension(155, 32768));
@@ -169,17 +169,13 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(dpPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+            .addComponent(dpPanel, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(dpPanel)
-                .addContainerGap())
+                .addComponent(dpPanel))
         );
 
         pack();
