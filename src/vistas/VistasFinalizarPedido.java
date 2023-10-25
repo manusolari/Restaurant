@@ -34,7 +34,6 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtablaListaPedidos = new javax.swing.JTable();
-        jbCobrar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jcMesasOcupadas = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
@@ -56,8 +55,6 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
             }
         ));
         jScrollPane1.setViewportView(jtablaListaPedidos);
-
-        jbCobrar.setText("Cobrar");
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -96,9 +93,7 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
                         .addComponent(jLabel3)))
                 .addContainerGap(56, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jbCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99))
         );
@@ -115,9 +110,7 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbCobrar)
-                    .addComponent(jbSalir))
+                .addComponent(jbSalir)
                 .addGap(42, 42, 42))
         );
 
@@ -132,18 +125,10 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
 
     private void jcMesasOcupadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcMesasOcupadasActionPerformed
         try{
-            //borrarFilas();
+            borrarFilas();
             Mesa m = (Mesa)jcMesasOcupadas.getSelectedItem();
-                 ArrayList<Pedido> lista = pd.buscarPedidosPorCobrar();
-                
-                System.out.println(lista);
-                System.out.println(pd.buscarPedidosPorCobrar());
-                for (Pedido p : lista) {
-                    System.out.println("hola");
-                    if (m.getNumeroMesa() == p.getMesa().getNumeroMesa()) {
-                 modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), p.isCobrada(), p.getFechaHora(), p.getNombreMesero()});   
-                    }
-                }
+            System.out.println(m.getIdMesa()); 
+            cargarTablaMesas( m);
         }catch(NullPointerException nc){
             JOptionPane.showMessageDialog(this, "Debe seleccionar una mesa");
     }//GEN-LAST:event_jcMesasOcupadasActionPerformed
@@ -154,7 +139,6 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbCobrar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Mesa> jcMesasOcupadas;
     private javax.swing.JTable jtablaListaPedidos;
@@ -182,8 +166,26 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
         for (; f >= 0; f--) {
             modelo.removeRow(f);
         }
-    }
+     }
+        public void cargarTablaMesas(Mesa m){
+           borrarFilas();
+            ArrayList<Pedido> lista = pd.buscarPedidosPorCobrar();
+                System.out.println(lista);
+                System.out.println(pd.buscarPedidosPorCobrar());
+                for (Pedido p : lista) {
+                   
+                    if (m.getNumeroMesa() == p.getMesa().getNumeroMesa()) { 
+                         modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(),  calcularImporte(p), p.getFechaHora(), p.getNombreMesero()});   
+                    }
+                }
+        }
+        public double calcularImporte(Pedido p){
+       
+       double importe = pd.calcularImporte(p.getIdPedido());
+       return importe;
+        }
+     }
 
-}
+
 
 
