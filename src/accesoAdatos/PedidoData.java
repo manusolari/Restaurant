@@ -82,9 +82,7 @@ public class PedidoData {
             ps.setDouble(1, importe);
             ps.setInt(2, idPedido);
             int exito = ps.executeUpdate();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Importe agregado a tabla");
-            }
+           
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede conectar a la tabla Pedido");
         }
