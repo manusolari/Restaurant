@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
-    private PedidoData pd;
+    private PedidoData pd = new PedidoData();
     private MesaData md;
     private DefaultTableModel modelo = new DefaultTableModel();
     
@@ -19,7 +19,7 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
         initComponents();
         md = new MesaData();
         llenarMesasOcupadas();
-        
+        armarTabla();
     }
 
     /**
@@ -34,7 +34,6 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
         jbCobrar = new javax.swing.JButton();
         jbActualizar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jbRedirigir = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -74,13 +73,6 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Actualizar");
 
-        jbRedirigir.setText("Pedido");
-        jbRedirigir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbRedirigirActionPerformed(evt);
-            }
-        });
-
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +82,7 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Finalizar Pdidos");
+        jLabel1.setText("Finalizar Pedidos");
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Mesa   a  Buscar : ");
@@ -117,10 +109,8 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
                                 .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53)
-                                .addComponent(jbCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(63, 63, 63)
-                                .addComponent(jbRedirigir, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(144, 144, 144)
+                                .addComponent(jbCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(180, 180, 180)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -145,11 +135,9 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jbCobrar)
-                        .addComponent(jbRedirigir)))
+                    .addComponent(jbCobrar))
                 .addGap(8, 8, 8)
                 .addComponent(jbSalir)
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -170,29 +158,16 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jbCobrarActionPerformed
 
-    private void jbRedirigirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRedirigirActionPerformed
-       
-       VistasIniciarPedido mover = new VistasIniciarPedido();
-       this.dispose();
-       mover.setVisible(true);
-      //mover.set
-       
-        
-    }//GEN-LAST:event_jbRedirigirActionPerformed
-
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
        // es este 
-       
-       Mesa m = (Mesa)jComboBox1.getSelectedItem();
-      
-        System.out.println("1");
-        List <Pedido> listaP = pd.buscarPedidosPorCobrar();
-        System.out.println("2");
-        for (Pedido pe : listaP ){   
-        if(pe.getMesa().getIdMesa() == m.getIdMesa()){
-        modelo.addRow(new Object[]{pe.getIdPedido(),pe.getMesa().getIdMesa(),pd.calcularImporte(pe.getIdPedido()),pe.getFechaHora(),pe.getNombreMesero()});
-    }
-        }    
+       //impiarTabla();
+         System.out.println(pd.buscarPedidosPorCobrar());
+         
+         Mesa m = (Mesa)jComboBox1.getSelectedItem();
+        System.out.println(m);
+         llenarTablaPedido( m);
+    
+          
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
@@ -204,7 +179,6 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbCobrar;
-    private javax.swing.JButton jbRedirigir;
     private javax.swing.JButton jbSalir;
     private javax.swing.JTable jtablaListaPedidos;
     // End of variables declaration//GEN-END:variables
@@ -231,14 +205,13 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
             modelo.removeRow(f);
         }
     }
-    public void llenarTablaPedido(Pedido p, Mesa m){
+    public void llenarTablaPedido(Mesa m){
         
         limpiarTabla();
-        System.out.println("1");
-        List <Pedido> listaP = pd.buscarPedidosPorCobrar();
-        System.out.println("2");
-        for (Pedido pe : listaP ){   
-        if(pe.getMesa().getIdMesa() == m.getIdMesa()){
+         
+        List <Pedido> listaPedido =  pd.buscarPedidosPorCobrar();
+        for (Pedido pe : listaPedido ){   
+        if(pe.getMesa().getNumeroMesa() == m.getNumeroMesa()){
         modelo.addRow(new Object[]{pe.getIdPedido(),pe.getMesa().getIdMesa(),pd.calcularImporte(pe.getIdPedido()),pe.getFechaHora(),pe.getNombreMesero()});
     }
     } 
