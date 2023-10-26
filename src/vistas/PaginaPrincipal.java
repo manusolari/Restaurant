@@ -56,7 +56,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         dpPanel.setBackground(new java.awt.Color(153, 153, 0));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/p1.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/234fondo.jpg"))); // NOI18N
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         dpPanel.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
