@@ -1,21 +1,18 @@
-
 package vistas;
 
 import accesoAdatos.MesaData;
 import entidades.Mesa;
 import javax.swing.JOptionPane;
 
-
 public class VistasMesas extends javax.swing.JInternalFrame {
 
     private MesaData md = new MesaData();
     private Mesa m = null;
-    
+
     public VistasMesas() {
         initComponents();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -129,10 +126,9 @@ public class VistasMesas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
+
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-         this.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
@@ -141,29 +137,40 @@ public class VistasMesas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbAgregarYActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarYActualizarActionPerformed
-        
-        try{
+
+        try {
             Integer numMesa = Integer.parseInt(jtNumMesa.getText());
             Integer capacidad = Integer.parseInt(jtCapacidad.getText());
             Boolean estado = jrEstado.isSelected();
-            
-            if(m == null){
+            Mesa m1 = md.buscarMesaPorNumero(numMesa);
+
+            if (m == null) {
                 m = new Mesa(numMesa, capacidad, estado);
                 md.agregarMesa(m);
-            }else{
-                m.setCapacidad(capacidad);
-                md.cambiarCapacidad(numMesa, capacidad);
+                
+                limpiar();
+            } else {
+                if (m.getCapacidad() == capacidad) {
+                    JOptionPane.showMessageDialog(this, "La capacidad ingresada es la actual");
+                    limpiar();
+                    
+                } else {
+                    m.setCapacidad(capacidad);
+                    md.cambiarCapacidad(numMesa, capacidad);
+                    limpiar();
+                }
             }
-            
-        }catch(NumberFormatException ex){
+
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Los campos necesitan ser completados con valores numéricos");
         }
     }//GEN-LAST:event_jbAgregarYActualizarActionPerformed
 
-    public void limpiar(){
+    public void limpiar() {
         jtNumMesa.setText("");
         jtCapacidad.setText("");
-    } 
+        jrEstado.setSelected(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
