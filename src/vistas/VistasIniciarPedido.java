@@ -67,6 +67,12 @@ public class VistasIniciarPedido extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Agregar Productos:");
 
+        jCBMesasLibres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBMesasLibresActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("Crear Pedido");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,6 +202,10 @@ public class VistasIniciarPedido extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un producto");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jCBMesasLibresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBMesasLibresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBMesasLibresActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

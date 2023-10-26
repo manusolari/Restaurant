@@ -193,13 +193,16 @@ public class MesaData {
         return lista;
     }
     public Mesa buscarMesaPorNumero(int numero){
-        Mesa m= new Mesa();
+        
+            Mesa m= new Mesa();
         ArrayList<Mesa> mesas= listarMesas();
         for (Mesa i : mesas){
             if (i.getNumeroMesa()==numero){
                 m=i;
             }
         }
+     
+    
         return m;
     }
     //----------AgrgadoUltimo-------------------------------------------------

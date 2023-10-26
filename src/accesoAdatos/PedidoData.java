@@ -172,12 +172,11 @@ public class PedidoData {
 //        }
     public int pedidoXIdMesa(Mesa m) {
         int id = 0;
-        String sql = " SELECT pedido.* FROM pedido JOIN mesa ON(pedido.idMesa = mesa.idMesa) "
-                + " WHERE pedido.idMesa = ? AND mesa.estado = 0 ";
+        String sql = " SELECT pedido.* FROM pedido JOIN mesa ON(pedido.idMesa = mesa.idMesa) WHERE pedido.idMesa = ? AND mesa.estado = 0 ";
         PreparedStatement ps;
         try {
             ps = con.prepareStatement(sql);
-
+            System.out.println(m);
             m = md.buscarMesaPorNumero(m.getNumeroMesa());
 
             ps.setInt(1, m.getIdMesa());
