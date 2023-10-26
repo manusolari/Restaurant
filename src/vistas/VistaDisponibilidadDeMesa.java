@@ -23,8 +23,9 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
     /**
      * Creates new form VistaDisponibilidadDeMesa
      */
-    private MesaData md = new MesaData(); 
+    private MesaData md = new MesaData();
     private DefaultTableModel modelo = new DefaultTableModel();
+
     public VistaDisponibilidadDeMesa() {
         initComponents();
         modelarTabla();
@@ -190,8 +191,8 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_radioMNoDisponibleActionPerformed
 
     private void radioMDisponibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioMDisponibleActionPerformed
-       activarBoton();
-       llenarMesasLibres();
+        activarBoton();
+        llenarMesasLibres();
     }//GEN-LAST:event_radioMDisponibleActionPerformed
 
     private void radioMTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioMTodasActionPerformed
@@ -201,56 +202,41 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
 
     private void botonActivarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActivarBActionPerformed
         limpiarTabla();
-        radioMDisponible.setSelected(false);
-        radioMNoDisponible.setSelected(false);
-        radioMTodas.setSelected(false);
+       GrupoMesas.clearSelection();
         jtNumeroM.setEnabled(true);
-        jtNumeroM.setText(" ");
-        
-//        Mesa m;
-//        
-//        m = md.buscarMesaPorNumero(Integer.parseInt(jtNumeroM.getText()));
-//        
-//        if (m.getNumeroMesa() == (Integer.parseInt(jtNumeroM.getText()))) {
-//            String estado;
-//            if (m.isEstadoMesa()) {
-//                estado = "Activo";
-//            } else {
-//                estado = "Inactivo";
-//            }
-//            modelo.addRow(new Object[]{m.getIdMesa(), m.getNumeroMesa(), m.getCapacidad(), estado});
-//        }
-//        
-           
+        jtNumeroM.setText("");
+
+
     }//GEN-LAST:event_botonActivarBActionPerformed
 
     private void jtNumeroMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNumeroMKeyTyped
-         char letra = evt.getKeyChar();
-     if (!Character.isDigit(letra)){
-         evt.consume();}
+        char letra = evt.getKeyChar();
+        if (!Character.isDigit(letra)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_jtNumeroMKeyTyped
 
     private void jtNumeroMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNumeroMActionPerformed
-         
+
     }//GEN-LAST:event_jtNumeroMActionPerformed
 
     private void jtNumeroMKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNumeroMKeyReleased
-       Mesa m;
-        
-       try{
-        System.out.println(m = md.buscarMesaPorNumero(Integer.parseInt(jtNumeroM.getText())));
-        
-        if (m.getNumeroMesa() == (Integer.parseInt(jtNumeroM.getText()))) {
-            String estado;
-            if (m.isEstadoMesa()) {
-                estado = "Activo";
-            } else {
-                estado = "Inactivo";
+        Mesa m;
+
+        try {
+            System.out.println(m = md.buscarMesaPorNumero(Integer.parseInt(jtNumeroM.getText())));
+
+            if (m.getNumeroMesa() == (Integer.parseInt(jtNumeroM.getText()))) {
+                String estado;
+                if (m.isEstadoMesa()) {
+                    estado = "Activo";
+                } else {
+                    estado = "Inactivo";
+                }
+                modelo.addRow(new Object[]{m.getIdMesa(), m.getNumeroMesa(), m.getCapacidad(), estado});
             }
-            modelo.addRow(new Object[]{m.getIdMesa(), m.getNumeroMesa(), m.getCapacidad(), estado});
-        }
-        } catch (NumberFormatException nfe){
-        JOptionPane.showMessageDialog(null, "Recuerde Eliminar los Espacios, solo Numeros");
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(null, "Recuerde Eliminar los Espacios, solo Numeros");
         }
     }//GEN-LAST:event_jtNumeroMKeyReleased
 
@@ -269,74 +255,70 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton radioMTodas;
     // End of variables declaration//GEN-END:variables
 
-
-    public void limpiarTabla(){
-        int f= jtTablaM.getRowCount()-1;
-        for (;f>=0;f--){
+    public void limpiarTabla() {
+        int f = jtTablaM.getRowCount() - 1;
+        for (; f >= 0; f--) {
             modelo.removeRow(f);
         }
     }
-           public void modelarTabla(){
-  modelo.addColumn("ID Mesa");
+
+    public void modelarTabla() {
+        modelo.addColumn("ID Mesa");
         modelo.addColumn("Numero de Mesa");
         modelo.addColumn("Capacidad");
         modelo.addColumn("Estado de Mesa");
         jtTablaM.setModel(modelo);
     }
 
-           private void llenarMesasTodas() {
+    private void llenarMesasTodas() {
         limpiarTabla();
         List<Mesa> listaTodas = md.listarMesas();
         for (Mesa m : listaTodas) {
-        String estado;
-        if(m.isEstadoMesa()){
-        estado = "Activo";
-        }else{
-            estado = "Inactivo";
-        }
-            modelo.addRow(new Object[]{m.getIdMesa(),m.getNumeroMesa(),m.getCapacidad(),estado});
+            String estado;
+            if (m.isEstadoMesa()) {
+                estado = "Activo";
+            } else {
+                estado = "Inactivo";
+            }
+            modelo.addRow(new Object[]{m.getIdMesa(), m.getNumeroMesa(), m.getCapacidad(), estado});
         }
     }
 
-             private void llenarMesasLibres() {
+    private void llenarMesasLibres() {
         limpiarTabla();
         List<Mesa> listaTodas = md.mesasLibres();
         for (Mesa m : listaTodas) {
-         String estado;
-        if(m.isEstadoMesa()){
-        estado = "Activo";
-        }else{
-            estado = "Inactivo";
-        }
-            modelo.addRow(new Object[]{m.getIdMesa(),m.getNumeroMesa(),m.getCapacidad(),estado});
+            String estado;
+            if (m.isEstadoMesa()) {
+                estado = "Activo";
+            } else {
+                estado = "Inactivo";
+            }
+            modelo.addRow(new Object[]{m.getIdMesa(), m.getNumeroMesa(), m.getCapacidad(), estado});
         }
     }
-           
-             private void llenarMesasOcupadas() {
+
+    private void llenarMesasOcupadas() {
         limpiarTabla();
         List<Mesa> listaTodas = md.mesasOcupadas();
         for (Mesa m : listaTodas) {
-          String estado;
-        if(m.isEstadoMesa()){
-        estado = "Activo";
-        }else{
-            estado = "Inactivo";
-        }
-            modelo.addRow(new Object[]{m.getIdMesa(),m.getNumeroMesa(),m.getCapacidad(),estado});
+            String estado;
+            if (m.isEstadoMesa()) {
+                estado = "Activo";
+            } else {
+                estado = "Inactivo";
+            }
+            modelo.addRow(new Object[]{m.getIdMesa(), m.getNumeroMesa(), m.getCapacidad(), estado});
         }
     }
-          private void activarBoton() {
-        if (radioMDisponible.isSelected()) {
-            jtNumeroM.setEnabled(false);
-        }
-        else if (radioMNoDisponible.isSelected()) {
-           jtNumeroM.setEnabled(false);
-        }
-        else if (radioMTodas.isSelected()) {
+
+    private void activarBoton() {
+        if (radioMDisponible.isSelected() || radioMNoDisponible.isSelected() || radioMTodas.isSelected()) {
             jtNumeroM.setEnabled(false);
         } else {
             jtNumeroM.setEnabled(true);
         }
+
     }
 
 }

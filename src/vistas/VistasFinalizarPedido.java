@@ -3,12 +3,15 @@ package vistas;
 
 import entidades.Mesa;
 import accesoAdatos.MesaData;
+import accesoAdatos.PedidoData;
+import entidades.Pedido;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 
 public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
-
+    private PedidoData pd;
     private MesaData md;
     private DefaultTableModel modelo = new DefaultTableModel();
     
@@ -26,18 +29,16 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtablaListaPedidos = new javax.swing.JTable();
         jbCobrar = new javax.swing.JButton();
+        jbActualizar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jbRedirigir = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
-        jcMesasOcupadas = new javax.swing.JComboBox<>();
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Finalizar Pedido");
-
-        jLabel2.setText("N° de mesa a cobrar: ");
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         jtablaListaPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -61,11 +62,42 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jtablaListaPedidos);
 
         jbCobrar.setText("Cobrar");
+        jbCobrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCobrarActionPerformed(evt);
+            }
+        });
+
+        jbActualizar.setText("jButton1");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Actualizar");
+
+        jbRedirigir.setText("Pedido");
+        jbRedirigir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbRedirigirActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Finalizar Pdidos");
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Mesa   a  Buscar : ");
+
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
             }
         });
 
@@ -76,43 +108,52 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jbCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(118, 118, 118)
-                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(451, 451, 451)
+                                .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(53, 53, 53)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(jcMesasOcupadas, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                                .addComponent(jbCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(63, 63, 63)
+                                .addComponent(jbRedirigir, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(180, 180, 180)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jcMesasOcupadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbCobrar)
-                    .addComponent(jbSalir))
-                .addGap(49, 49, 49))
+                .addGap(27, 27, 27)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbCobrar)
+                        .addComponent(jbRedirigir)))
+                .addGap(8, 8, 8)
+                .addComponent(jbSalir)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
-
-        jcMesasOcupadas.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -121,23 +162,86 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jbCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCobrarActionPerformed
+         Mesa m = (Mesa)jComboBox1.getSelectedItem();
+        
+         Pedido p = pd.buscarPedidoXid(pd.pedidoXIdMesa(m));
+        pd.cobrarPedido(p);
+        
+    }//GEN-LAST:event_jbCobrarActionPerformed
+
+    private void jbRedirigirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRedirigirActionPerformed
+       
+       VistasIniciarPedido mover = new VistasIniciarPedido();
+       this.dispose();
+       mover.setVisible(true);
+      //mover.set
+       
+        
+    }//GEN-LAST:event_jbRedirigirActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+       // es este 
+       
+       Mesa m = (Mesa)jComboBox1.getSelectedItem();
+      
+        System.out.println("1");
+        List <Pedido> listaP = pd.buscarPedidosPorCobrar();
+        System.out.println("2");
+        for (Pedido pe : listaP ){   
+        if(pe.getMesa().getIdMesa() == m.getIdMesa()){
+        modelo.addRow(new Object[]{pe.getIdPedido(),pe.getMesa().getIdMesa(),pd.calcularImporte(pe.getIdPedido()),pe.getFechaHora(),pe.getNombreMesero()});
+    }
+        }    
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Mesa> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbCobrar;
+    private javax.swing.JButton jbRedirigir;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<Mesa> jcMesasOcupadas;
     private javax.swing.JTable jtablaListaPedidos;
     // End of variables declaration//GEN-END:variables
 
     private void llenarMesasOcupadas(){
-          jcMesasOcupadas.addItem(null);
+          jComboBox1.addItem(null);
         ArrayList<Mesa> lista = md.mesasOcupadas();
         for (Mesa m : lista) {
-            jcMesasOcupadas.addItem(m);
+            jComboBox1.addItem(m);
         }
+    }
+    
+    public void armarTabla() {
+        modelo.addColumn("IdPedido");
+        modelo.addColumn("IdMesa");
+        modelo.addColumn("Importe");
+        modelo.addColumn("fecha_hora");
+        modelo.addColumn("nombreMesero");
+        jtablaListaPedidos.setModel(modelo);
+    }
+     public void limpiarTabla() {
+        int f = jtablaListaPedidos.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            modelo.removeRow(f);
+        }
+    }
+    public void llenarTablaPedido(Pedido p, Mesa m){
+        
+        limpiarTabla();
+        System.out.println("1");
+        List <Pedido> listaP = pd.buscarPedidosPorCobrar();
+        System.out.println("2");
+        for (Pedido pe : listaP ){   
+        if(pe.getMesa().getIdMesa() == m.getIdMesa()){
+        modelo.addRow(new Object[]{pe.getIdPedido(),pe.getMesa().getIdMesa(),pd.calcularImporte(pe.getIdPedido()),pe.getFechaHora(),pe.getNombreMesero()});
+    }
+    } 
     }
 
 }
