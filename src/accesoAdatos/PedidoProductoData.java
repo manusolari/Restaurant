@@ -43,16 +43,16 @@ public class PedidoProductoData {
         ProductoData prd = new ProductoData();
         Producto p = pp.getProducto();
         p.setIdProducto(prd.buscarProductoXnombre(pp.getProducto().getNombre()));
-        System.out.println(habilitarPedido(pp.getProducto(), pp.getCantidad()));
-        System.out.println(pp.getProducto());
+//        System.out.println(habilitarPedido(pp.getProducto(), pp.getCantidad()));
+//        System.out.println(pp.getProducto());
         if (habilitarPedido(pp.getProducto(), pp.getCantidad())) {
 
             try {
 
                 PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                System.out.println(pd.pedidoXIdMesa(pp.getPedido().getMesa()));
-                System.out.println((pp.getProducto().getIdProducto()));
-                //int id = pd.pedidoXIdMesa(pedido.getMesa());
+//                System.out.println(pd.pedidoXIdMesa(pp.getPedido().getMesa()));
+//                System.out.println((pp.getProducto().getIdProducto()));
+//                int id = pd.pedidoXIdMesa(pedido.getMesa());
 
                 ps.setInt(1, pd.pedidoXIdMesa(pp.getPedido().getMesa()));
                 ps.setInt(2, pp.getProducto().getIdProducto());
@@ -69,6 +69,7 @@ public class PedidoProductoData {
         } else {
             JOptionPane.showMessageDialog(null, "No hay stock suficiente para realizar el pedido");
         }
+        JOptionPane.showMessageDialog(null, "Producto agregado al pedido");
     }
 
     public boolean habilitarPedido(Producto p, int cantidad) {

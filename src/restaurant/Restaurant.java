@@ -65,14 +65,15 @@ PedidoProductoData ppd = new PedidoProductoData();
         //System.out.println( pedData.calcularImporte(7));
         //pedData.listaXMesero("Melquiades");
         
-      Producto p7= new Producto("Cerveza", 10, 1000, true);
+      Producto p7= new Producto(9,"Cerveza", 10, 1000, true);
       //pd.agregarProducto(p7);
       Mesa m6= new Mesa(4, 6, true);
       //mesa.agregarMesa(m6);
-      Pedido ped = new Pedido(m6, "Pepe", LocalDate.now(ZoneId.systemDefault()));
+      Pedido ped = new Pedido(19, m6, "Pepe",LocalDate.now(ZoneId.systemDefault()), 0, false);
       //pedData.iniciarPedido(ped);
       PedidoProducto pdProd= new PedidoProducto (p7, ped, 2);
-      //ppd.iniciarPedidoProducto(pdProd);
+      
+     // ppd.iniciarPedidoProducto(pdProd);
       //----------Prueba de listar pedidos por id-------------
         //System.out.println( ppd.listarPedidoProductoXPedido(7));
         //System.out.println(pd.listarProducto());
@@ -80,7 +81,8 @@ PedidoProductoData ppd = new PedidoProductoData();
         //System.out.println(mesa.buscarMesaPorId());
         //mesa.agregarMesa(m6);
 //------------------------ por fecha ------------------------------
-        System.out.println( pedData.listarPedidosXFecha(LocalDate.of(2023, 10, 10), LocalDate.of(2023, 10, 19)));
+//        System.out.println( pedData.listarPedidosXFecha(LocalDate.of(2023, 10, 10), LocalDate.of(2023, 10, 19)));
+    System.out.println(pedData.buscarPedidoXid(16));
 
     }
 

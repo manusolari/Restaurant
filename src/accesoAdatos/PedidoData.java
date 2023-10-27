@@ -34,7 +34,7 @@ public class PedidoData {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             m = md.buscarMesaPorNumero(p.getMesa().getNumeroMesa());
             ps.setInt(1, m.getIdMesa());
-            ps.setDate(2, Date.valueOf(p.getFechaHora()));
+            ps.setDate(2, Date.valueOf(LocalDate.now()));
             ps.setString(3, p.getNombreMesero());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -218,6 +218,7 @@ public class PedidoData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede conectar a la tabla Pedido");
         }
+        
         return p;
     }
 

@@ -15,6 +15,7 @@ import entidades.Producto;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -26,12 +27,15 @@ public class VistasIniciarPedido extends javax.swing.JInternalFrame {
     private PedidoData pd;
     private PedidoProductoData ppd;
     private ProductoData prodData;
+    private DefaultTableModel modelo = new DefaultTableModel();
+     
     public VistasIniciarPedido() {
         initComponents();
         md= new MesaData();
         pd= new PedidoData();
         ppd= new PedidoProductoData();
         prodData= new ProductoData();
+        armarCabecera();
         llenarCombo1();
         llenarCombo2();
     }
@@ -57,6 +61,8 @@ public class VistasIniciarPedido extends javax.swing.JInternalFrame {
         jTidPedido = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTcantidad = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTProductos = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Iniciar Pedido");
@@ -66,6 +72,12 @@ public class VistasIniciarPedido extends javax.swing.JInternalFrame {
         jLabel3.setText("Mesero:");
 
         jLabel4.setText("Agregar Productos:");
+
+        jCBagregarProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBagregarProductosActionPerformed(evt);
+            }
+        });
 
         jCBMesasLibres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,26 +110,49 @@ public class VistasIniciarPedido extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Cantidad: ");
 
+        jTProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTProductos);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(16, 16, 16))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(28, 28, 28)
+                        .addComponent(jButton3))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(122, 122, 122)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCBagregarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                                .addComponent(jTcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -127,16 +162,8 @@ public class VistasIniciarPedido extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jCBMesasLibres, 0, 218, Short.MAX_VALUE)
                                     .addComponent(jTmesero)
-                                    .addComponent(jTidPedido)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jCBagregarProductos, 0, 218, Short.MAX_VALUE)
-                                    .addComponent(jTcantidad))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jTidPedido))))))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,20 +182,21 @@ public class VistasIniciarPedido extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTidPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jCBagregarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addGap(67, 67, 67)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(19, 19, 19))
+                    .addComponent(jButton3)))
         );
 
         pack();
@@ -192,12 +220,18 @@ public class VistasIniciarPedido extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try{
-        int idPedido= Integer.parseInt(jTidPedido.getText());
-        Pedido p= pd.buscarPedidoXid(idPedido);
-        Producto pr= (Producto) jCBagregarProductos.getSelectedItem();
-        int cantidad= Integer.parseInt(jTcantidad.getText());
-        PedidoProducto pedProd= new PedidoProducto(pr, p, cantidad);
-        ppd.iniciarPedidoProducto(pedProd);
+        for(int i=0; i<modelo.getRowCount(); i++){
+            Integer idPedido= (Integer)( modelo.getValueAt(i, 0));
+            Integer idProducto= (Integer) modelo.getValueAt(i, 1);
+            Integer cantidad= (Integer)modelo.getValueAt(i, 3);
+            Pedido p= pd.buscarPedidoXid(idPedido);
+            
+            Producto pr= prodData.buscarProductoPorId(idProducto);
+            
+            PedidoProducto pedProd= new PedidoProducto(pr, p, cantidad);
+            ppd.iniciarPedidoProducto(pedProd);   
+        }
+        limpiarTabla();
         }catch(NullPointerException nc){
             JOptionPane.showMessageDialog(this, "Debe seleccionar un producto");
         }
@@ -206,6 +240,20 @@ public class VistasIniciarPedido extends javax.swing.JInternalFrame {
     private void jCBMesasLibresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBMesasLibresActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBMesasLibresActionPerformed
+
+    private void jCBagregarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBagregarProductosActionPerformed
+        try{
+        int idPedido= Integer.parseInt(jTidPedido.getText());
+        Producto p= (Producto)jCBagregarProductos.getSelectedItem();
+        int cantidad= Integer.parseInt(jTcantidad.getText());
+        modelo.addRow(new Object[]{idPedido, p.getIdProducto(), p.getNombre(), cantidad, p.getPrecio()});
+        } catch(NullPointerException nc){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto, cantidad  idPedido no pueden ser nulos");
+        }catch(NumberFormatException nfe){
+            JOptionPane.showMessageDialog(this, "Los campos no deben ser nulos");
+        }
+        
+    }//GEN-LAST:event_jCBagregarProductosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -220,6 +268,8 @@ public class VistasIniciarPedido extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTProductos;
     private javax.swing.JTextField jTcantidad;
     private javax.swing.JTextField jTidPedido;
     private javax.swing.JTextField jTmesero;
@@ -238,6 +288,22 @@ public class VistasIniciarPedido extends javax.swing.JInternalFrame {
         ArrayList<Producto> lista= prodData.listarProductos();
         for (Producto p: lista){
             jCBagregarProductos.addItem(p);
+        }
+    }
+    
+    public void armarCabecera(){
+        modelo.addColumn("IdPedido");
+        modelo.addColumn("IdProducto");
+        modelo.addColumn("Producto");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Precio");
+        jTProductos.setModel(modelo);
+    }
+    
+     public void limpiarTabla() {
+        int f = jTProductos.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            modelo.removeRow(f);
         }
     }
             
