@@ -38,6 +38,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jmFacturacion = new javax.swing.JMenuItem();
         jmIniciarP = new javax.swing.JMenu();
         jmIniciarPed = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jmFinalizarP = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
@@ -162,6 +163,14 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         });
         jmIniciarP.add(jmIniciarPed);
 
+        jMenuItem2.setText("Agregar Producto");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jmIniciarP.add(jMenuItem2);
+
         jmFinalizarP.setText("Finalizar Pedido");
         jmFinalizarP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -277,6 +286,15 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         dpPanel.moveToFront(vp);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        dpPanel.removeAll();
+        dpPanel.repaint();
+        AgregarProductos ap = new AgregarProductos();
+        ap.setVisible(true);
+        dpPanel.add(ap);
+        dpPanel.moveToFront(ap);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -318,6 +336,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jmDisponibilidad;
     private javax.swing.JMenuItem jmEstadoP;
     private javax.swing.JMenu jmEstadosP;
