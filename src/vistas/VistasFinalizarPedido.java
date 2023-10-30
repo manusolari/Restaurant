@@ -68,6 +68,11 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
         });
 
         jbActualizar.setText("jButton1");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -169,6 +174,11 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
     
           
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+        jComboBox1.getSelectedIndex();
+        limpiarTabla();
+    }//GEN-LAST:event_jbActualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
