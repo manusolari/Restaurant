@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package vistas;
 
 import accesoAdatos.MesaData;
@@ -17,10 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ImageIcon;
-/**
- *
- * @author EXO
- */
+
 public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modelo = new DefaultTableModel();
@@ -36,7 +30,8 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
         armarCabecera();
         llenarCombo1();
         llenarCombo2();
-     //this.setContentPane(fondo);
+        DesactivarCampos();
+     
     }
 
    
@@ -220,9 +215,9 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
                     .addComponent(jRBnumMesa)
                     .addComponent(jCBMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRBMesero)
-                    .addComponent(jCBMesero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCBMesero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRBMesero))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
@@ -253,7 +248,7 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRBPedidosCobradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBPedidosCobradosActionPerformed
-        // TODO add your handling code here:borrarFilas();
+        
         borrarFilas();
         activarCampos();
         ArrayList<Pedido> lista = new ArrayList<>();
@@ -266,11 +261,12 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
                 estado = "No Cobrada";
             }
             modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), estado, p.getFechaHora(), p.getNombreMesero()});
+               
         }
     }//GEN-LAST:event_jRBPedidosCobradosActionPerformed
 
     private void jRBPedidosXcobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBPedidosXcobrarActionPerformed
-        borrarFilas();
+         borrarFilas();
          activarCampos();
         ArrayList<Pedido> lista = new ArrayList<>();
         lista = pd.buscarPedidosPorCobrar();
@@ -282,11 +278,16 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
                 estado = "No Cobrada";
             }
             modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), estado, p.getFechaHora(), p.getNombreMesero()});
+            
         }
     }//GEN-LAST:event_jRBPedidosXcobrarActionPerformed
 
     private void jCBMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBMesaActionPerformed
         try{
+          if(!jRBnumMesa.isSelected()){
+              jCBMesa.setEnabled(false);
+          }else{
+         jCBMesa.setEnabled(true);     
         Mesa ms = (Mesa) jCBMesa.getSelectedItem();
         int numeroMesa= ms.getNumeroMesa();
         if(jRBnumMesa.isSelected()){
@@ -313,6 +314,7 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
                     }
                 }
             }
+        }  
        }
            
             
@@ -380,19 +382,19 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRBMeseroActionPerformed
 
     private void jCBMesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBMesaMouseClicked
-        if(!jRBnumMesa.isSelected()){
-        JOptionPane.showMessageDialog(this, " Debe seleccionar si es un Pedido Cobrado o Pedido por Cobrado ");
-        jCBMesa.setSelectedIndex(-1);
-            jCBMesero.setSelectedIndex(-1);
-        }
+//        if(!jRBnumMesa.isSelected()){
+//        JOptionPane.showMessageDialog(this, " Debe seleccionar si es un Pedido Cobrado o Pedido por Cobrado ");
+//        jCBMesa.setSelectedIndex(-1);
+//            jCBMesero.setSelectedIndex(-1);
+//        }
     }//GEN-LAST:event_jCBMesaMouseClicked
 
     private void jCBMeseroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBMeseroMouseClicked
-      if(!jRBMesero.isSelected()){
-        JOptionPane.showMessageDialog(this, " Debe seleccionar si es un Pedido Cobrado o Pedido por Cobrado ");
-        jCBMesa.setSelectedIndex(-1);
-            jCBMesero.setSelectedIndex(-1);
-        }
+//      if(!jRBMesero.isSelected()){
+//        JOptionPane.showMessageDialog(this, " Debe seleccionar si es un Pedido Cobrado o Pedido por Cobrado ");
+//        jCBMesa.setSelectedIndex(-1);
+//            jCBMesero.setSelectedIndex(-1);
+//        }
         
     }//GEN-LAST:event_jCBMeseroMouseClicked
 
@@ -466,7 +468,10 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
          jRBMesero.setEnabled(true);
          jCBMesa.setEnabled(true);
          jCBMesero.setEnabled(true);
-               
+         
+         if(jRBPedidosCobrados.isSelected() || jRBPedidosXcobrar.isSelected()){
+             limpiarCampos();
+         }
         
     
  }
@@ -476,9 +481,13 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
          jRBMesero.setEnabled(false);
          jCBMesa.setEnabled(false);
          jCBMesero.setEnabled(false);
-         
-    
-    
+            
+ }
+ 
+ public void limpiarCampos(){
+    Grupo2.clearSelection();
+    jCBMesa.setSelectedIndex(-1);
+    jCBMesero.setSelectedIndex(-1);
  }
     class FondoPanel extends JPanel
     {

@@ -260,8 +260,9 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
         Mesa m;
 
         try {
-            System.out.println(m = md.buscarMesaPorNumero(Integer.parseInt(jtNumeroM.getText())));
-
+           String numMesa = jtNumeroM.getText().trim();
+           if (!numMesa.isEmpty()){
+                m = md.buscarMesaPorNumero(Integer.parseInt(numMesa));
             if (m.getNumeroMesa() == (Integer.parseInt(jtNumeroM.getText()))) {
                 String estado;
                 if (m.isEstadoMesa()) {
@@ -270,7 +271,7 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
                     estado = "Inactivo";
                 }
                 modelo.addRow(new Object[]{m.getIdMesa(), m.getNumeroMesa(), m.getCapacidad(), estado});
-                return;
+            }  
             }
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(null, "Recuerde Eliminar los Espacios, solo Numeros");
