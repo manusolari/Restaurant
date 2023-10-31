@@ -82,7 +82,9 @@ PedidoProductoData ppd = new PedidoProductoData();
         //mesa.agregarMesa(m6);
 //------------------------ por fecha ------------------------------
         //System.out.println( pedData.listarPedidosXFecha(LocalDate.of(2023, 10, 10), LocalDate.of(2023, 10, 19)));
-        System.out.println( pedData.buscarPedidosPorCobrar());
+       // System.out.println( pedData.buscarPedidosPorCobrar());
+       
+       ppd.iniciarPedidoProducto(pdProd);
     }
 
 }

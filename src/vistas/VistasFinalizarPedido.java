@@ -168,18 +168,16 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
         
          Pedido p = pd.buscarPedidoXid(pd.pedidoXIdMesa(m));
         pd.cobrarPedido(p);
+        limpiarTabla();
+        jComboBox1.setSelectedIndex(-1);
         
     }//GEN-LAST:event_jbCobrarActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-       // es este 
-       //impiarTabla();
-         System.out.println(pd.buscarPedidosPorCobrar());
-         
+  
          Mesa m = (Mesa)jComboBox1.getSelectedItem();
-        System.out.println(m);
-         llenarTablaPedido( m);
-    
+        
+         llenarTablaPedido( m);    
           
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
@@ -198,8 +196,12 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
     private void llenarMesasOcupadas(){
           jComboBox1.addItem(null);
         ArrayList<Mesa> lista = md.mesasOcupadas();
+        ArrayList <Pedido> listaPedido =  pd.buscarPedidosPorCobrar();
         for (Mesa m : lista) {
-            jComboBox1.addItem(m);
+            for (Pedido p : listaPedido){
+                if(p.getMesa().getIdMesa() == m.getIdMesa())
+                jComboBox1.addItem(m);
+            }
         }
     }
     
@@ -222,13 +224,14 @@ public class VistasFinalizarPedido extends javax.swing.JInternalFrame {
         limpiarTabla();
          
         List <Pedido> listaPedido =  pd.buscarPedidosPorCobrar();
-        for (Pedido pe : listaPedido ){   
+        for (Pedido pe : listaPedido ){ 
+            if(jComboBox1.getSelectedItem() != null){
         if(pe.getMesa().getNumeroMesa() == m.getNumeroMesa()){
         modelo.addRow(new Object[]{pe.getIdPedido(),pe.getMesa().getIdMesa(),pd.calcularImporte(pe.getIdPedido()),pe.getFechaHora(),pe.getNombreMesero()});
-    }
+     }
     } 
     }
-
+    }    
      class FondoPanel extends JPanel
     {
     private  Image imagen;

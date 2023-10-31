@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package vistas;
 
 import accesoAdatos.MesaData;
@@ -17,14 +13,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ImageIcon;
-/**
- *
- * @author EXO
- */
+
 public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modelo = new DefaultTableModel();
     FondoPanel fondo = new FondoPanel();
+
     public boolean isCellEditable(int f, int c) {
         return false;
     }
@@ -32,14 +26,15 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
 
     public VistasEstadoDePedidos() {
         initComponents();
-       
+
         armarCabecera();
         llenarCombo1();
         llenarCombo2();
-     //this.setContentPane(fondo);
+        DesactivarCampos();
+
     }
 
-   
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -50,7 +45,6 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         Grupo1 = new javax.swing.ButtonGroup();
-        Grupo2 = new javax.swing.ButtonGroup();
         jPanel1 = new FondoPanel();
         jLabel1 = new javax.swing.JLabel();
         jRBPedidosXcobrar = new javax.swing.JRadioButton();
@@ -102,7 +96,6 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
         });
 
         jRBnumMesa.setBackground(new java.awt.Color(204, 204, 204));
-        Grupo2.add(jRBnumMesa);
         jRBnumMesa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jRBnumMesa.setForeground(new java.awt.Color(255, 255, 255));
         jRBnumMesa.setText("Buscar por numero de Mesa");
@@ -113,7 +106,6 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
         });
 
         jRBMesero.setBackground(new java.awt.Color(204, 204, 204));
-        Grupo2.add(jRBMesero);
         jRBMesero.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jRBMesero.setForeground(new java.awt.Color(255, 255, 255));
         jRBMesero.setText("Buscar nombre de Mesero");
@@ -222,8 +214,7 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCBMesero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jRBMesero)))
+                    .addComponent(jRBMesero))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
@@ -254,25 +245,27 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRBPedidosCobradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBPedidosCobradosActionPerformed
-        // TODO add your handling code here:borrarFilas();
+        limpiarCampos();
         borrarFilas();
         activarCampos();
         ArrayList<Pedido> lista = new ArrayList<>();
         lista = pd.buscarPedidosCobrados();
         for (Pedido p : lista) {
-         String estado;
+            String estado;
             if (p.isCobrada()) {
                 estado = "Cobrada";
             } else {
                 estado = "No Cobrada";
             }
             modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), estado, p.getFechaHora(), p.getNombreMesero()});
+
         }
     }//GEN-LAST:event_jRBPedidosCobradosActionPerformed
 
     private void jRBPedidosXcobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBPedidosXcobrarActionPerformed
+        limpiarCampos();
         borrarFilas();
-         activarCampos();
+        activarCampos();
         ArrayList<Pedido> lista = new ArrayList<>();
         lista = pd.buscarPedidosPorCobrar();
         for (Pedido p : lista) {
@@ -283,124 +276,124 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
                 estado = "No Cobrada";
             }
             modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), estado, p.getFechaHora(), p.getNombreMesero()});
+
         }
     }//GEN-LAST:event_jRBPedidosXcobrarActionPerformed
 
     private void jCBMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBMesaActionPerformed
-        try{
-        Mesa ms = (Mesa) jCBMesa.getSelectedItem();
-        int numeroMesa= ms.getNumeroMesa();
-        if(jRBnumMesa.isSelected()){
-            if (jRBPedidosCobrados.isSelected()) {
-                borrarFilas();
-                ArrayList<Pedido> lista = new ArrayList<>();
-                lista = pd.buscarPedidosCobrados();
-
-                for (Pedido p : lista) {
-
-                    if (numeroMesa == p.getMesa().getNumeroMesa()) {
-                 modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), p.isCobrada(), p.getFechaHora(), p.getNombreMesero()});   
-                    }
-                }
-            } 
-            if (jRBPedidosXcobrar.isSelected()) {
-                borrarFilas();
-                ArrayList<Pedido> listaXcobrar = new ArrayList<>();
-                listaXcobrar = pd.buscarPedidosPorCobrar();
-                for (Pedido p : listaXcobrar) {
-
-                    if (numeroMesa == p.getMesa().getNumeroMesa()) {
-                 modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), p.isCobrada(), p.getFechaHora(), p.getNombreMesero()});   
-                    }
-                }
-            }
-       }
-           
+        
+        try {
+            jCBMesa.setEnabled(jRBnumMesa.isSelected());
             
-        }catch(NullPointerException nc){
+            if (jCBMesa.getSelectedItem() != null){
+            Mesa ms = (Mesa) jCBMesa.getSelectedItem();
+            int numeroMesa = ms.getNumeroMesa();
+            if (jRBnumMesa.isSelected()) {
+               
+                if (jRBPedidosCobrados.isSelected()) {
+                    borrarFilas();
+                    ArrayList<Pedido> lista = new ArrayList<>();
+                    lista = pd.buscarPedidosCobrados();
+
+                    for (Pedido p : lista) {
+
+                        if (numeroMesa == p.getMesa().getNumeroMesa()) {
+                            modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), p.isCobrada(), p.getFechaHora(), p.getNombreMesero()});
+                        }
+                    }
+                }
+                if (jRBPedidosXcobrar.isSelected()) {
+                    borrarFilas();
+                    ArrayList<Pedido> listaXcobrar = new ArrayList<>();
+                    listaXcobrar = pd.buscarPedidosPorCobrar();
+                    for (Pedido p : listaXcobrar) {
+
+                        if (numeroMesa == p.getMesa().getNumeroMesa()) {
+                            modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), p.isCobrada(), p.getFechaHora(), p.getNombreMesero()});
+                        }
+                    }
+                }
+              }  
+            }
+        } catch (NullPointerException nc) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una mesa");
         }
     }//GEN-LAST:event_jCBMesaActionPerformed
 
     private void jCBMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBMeseroActionPerformed
-        try{
-        String mozoS =  (String) jCBMesero.getSelectedItem();
-           
-        if(jRBMesero.isSelected()){
-            if (jRBPedidosCobrados.isSelected()) {
-                borrarFilas();
-                ArrayList<Pedido> lista = new ArrayList<>();
-                lista = pd.buscarPedidosCobrados();
-                for (Pedido p : lista) {
-                    
-                    if (mozoS == p.getNombreMesero()) {     
-                    modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), p.isCobrada(), p.getFechaHora(), p.getNombreMesero()});   
+   
+        try {
+            String mozoS = (String) jCBMesero.getSelectedItem();
+
+            if (jRBMesero.isSelected()) {
+                if (jRBPedidosCobrados.isSelected()) {
+                    borrarFilas();
+                    ArrayList<Pedido> lista = new ArrayList<>();
+                    lista = pd.buscarPedidosCobrados();
+                    for (Pedido p : lista) {
+
+                        if (mozoS.equals(p.getNombreMesero())) {
+                            modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), p.isCobrada(), p.getFechaHora(), p.getNombreMesero()});
+                        }
+                    }
+                }
+                if (jRBPedidosXcobrar.isSelected()) {
+                    borrarFilas();
+                    ArrayList<Pedido> listaXcobrar = new ArrayList<>();
+                    listaXcobrar = pd.buscarPedidosPorCobrar();
+                    for (Pedido p : listaXcobrar) {
+                        if (mozoS.equals(p.getNombreMesero())) {
+                            modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), p.isCobrada(), p.getFechaHora(), p.getNombreMesero()});
+                        }
                     }
                 }
             }
-            if (jRBPedidosXcobrar.isSelected()) {
-                borrarFilas();
-                ArrayList<Pedido> listaXcobrar = new ArrayList<>();
-                listaXcobrar = pd.buscarPedidosPorCobrar();
-                for (Pedido p : listaXcobrar) {
-                    if (mozoS.equals(p.getNombreMesero())) {
-                    modelo.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getImporte(), p.isCobrada(), p.getFechaHora(), p.getNombreMesero()});   
-                    }
-                }
-            }
-        }
-//        else
-//        {
-//            JOptionPane.showMessageDialog(this, " Debe seleccionar si es un Pedido Cobrado o Pedido por Cobrado ");
-//        }
-        }catch(NullPointerException nc){
+
+        } catch (NullPointerException nc) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un mesero");
-            
+
         }
     }//GEN-LAST:event_jCBMeseroActionPerformed
 
     private void jRBnumMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBnumMesaActionPerformed
-       if(!jRBPedidosCobrados.isSelected() && !jRBPedidosXcobrar.isSelected()){
-       JOptionPane.showMessageDialog(this, " Debe seleccionar si es un Pedido Cobrado o Pedido por Cobrado ");
-       
-       jCBMesa.setSelectedIndex(-1);
-       
-       jCBMesero.setSelectedIndex(-1);
-       DesactivarCampos();
-       }
+        jCBMesa.setEnabled(jRBnumMesa.isSelected());
+        if(jRBnumMesa.isSelected()){
+            jRBMesero.setSelected(false);
+             jCBMesero.setEnabled(false);
+        }
+        
     }//GEN-LAST:event_jRBnumMesaActionPerformed
 
     private void jRBMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBMeseroActionPerformed
-        if (!jRBPedidosCobrados.isSelected() && !jRBPedidosXcobrar.isSelected()) {
-            JOptionPane.showMessageDialog(this, " Debe seleccionar si es un Pedido Cobrado o Pedido por Cobrado ");
-            DesactivarCampos();
-            jCBMesa.setSelectedIndex(-1);
-            jCBMesero.setSelectedIndex(-1);
-        
+
+      jCBMesero.setEnabled(jRBMesero.isSelected());
+       if(jRBMesero.isSelected()){
+            jRBnumMesa.setSelected(false);
+            jCBMesa.setEnabled(false);
         }
+      
     }//GEN-LAST:event_jRBMeseroActionPerformed
 
     private void jCBMesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBMesaMouseClicked
-        if(!jRBnumMesa.isSelected()){
-        JOptionPane.showMessageDialog(this, " Debe seleccionar si es un Pedido Cobrado o Pedido por Cobrado ");
-        jCBMesa.setSelectedIndex(-1);
-            jCBMesero.setSelectedIndex(-1);
-        }
+//        if(!jRBnumMesa.isSelected()){
+//        JOptionPane.showMessageDialog(this, " Debe seleccionar si es un Pedido Cobrado o Pedido por Cobrado ");
+//        jCBMesa.setSelectedIndex(-1);
+//            jCBMesero.setSelectedIndex(-1);
+//        }
     }//GEN-LAST:event_jCBMesaMouseClicked
 
     private void jCBMeseroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBMeseroMouseClicked
-      if(!jRBMesero.isSelected()){
-        JOptionPane.showMessageDialog(this, " Debe seleccionar si es un Pedido Cobrado o Pedido por Cobrado ");
-        jCBMesa.setSelectedIndex(-1);
-            jCBMesero.setSelectedIndex(-1);
-        }
-        
+//      if(!jRBMesero.isSelected()){
+//        JOptionPane.showMessageDialog(this, " Debe seleccionar si es un Pedido Cobrado o Pedido por Cobrado ");
+//        jCBMesa.setSelectedIndex(-1);
+//            jCBMesero.setSelectedIndex(-1);
+//        }
+
     }//GEN-LAST:event_jCBMeseroMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup Grupo1;
-    private javax.swing.ButtonGroup Grupo2;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<Mesa> jCBMesa;
     private javax.swing.JComboBox<String> jCBMesero;
@@ -448,9 +441,9 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
 
     private void llenarCombo2() {
         jCBMesero.addItem("");
-       
+
         List<Pedido> lista = pd.listarPedido();
-        
+
         HashSet<String> meseros = new HashSet<>();
         for (Pedido p : lista) {
             String mozo = p.getNombreMesero();
@@ -461,40 +454,47 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
         }
 
     }
- public void activarCampos(){
+
+    public void activarCampos() {
+
+        jRBnumMesa.setEnabled(true);
+        jRBMesero.setEnabled(true);
        
-         jRBnumMesa.setEnabled(true);
-         jRBMesero.setEnabled(true);
-         jCBMesa.setEnabled(true);
-         jCBMesero.setEnabled(true);
-               
-        
-    
- }
- public void DesactivarCampos(){
-    
-         jRBnumMesa.setEnabled(false);
-         jRBMesero.setEnabled(false);
-         jCBMesa.setEnabled(false);
-         jCBMesero.setEnabled(false);
-         
-    
-    
- }
-    class FondoPanel extends JPanel
-    {
-    private  Image imagen;
-    
-    @Override
-    public void paint(Graphics g)
-    {
-     imagen = new ImageIcon(getClass().getResource("/Img/imag-interF.jpg")).getImage();
-    
-     g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
-    setOpaque(false);
-    super.paint(g);
+
+
     }
-    
+
+    public void DesactivarCampos() {
+
+        jRBnumMesa.setEnabled(false);
+        jRBMesero.setEnabled(false);
+        jCBMesa.setEnabled(false);
+        jCBMesero.setEnabled(false);
+
     }
- 
+
+    public void limpiarCampos() {
+        jRBnumMesa.setSelected(false);
+        jRBMesero.setSelected(false);
+        jCBMesa.setSelectedIndex(-1);
+        jCBMesero.setSelectedIndex(-1);
+    }
+
+    
+
+    class FondoPanel extends JPanel {
+
+        private Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+            imagen = new ImageIcon(getClass().getResource("/Img/imag-interF.jpg")).getImage();
+
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
+
+    }
+
 }
