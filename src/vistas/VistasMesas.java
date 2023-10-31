@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 public class VistasMesas extends javax.swing.JInternalFrame {
 
     private MesaData md = new MesaData();
-    private Mesa m = null;
    FondoPanel fondo = new FondoPanel();
     public VistasMesas() {
         initComponents();
@@ -136,13 +135,14 @@ public class VistasMesas extends javax.swing.JInternalFrame {
             Integer numMesa = Integer.parseInt(jtNumMesa.getText());
             Integer capacidad = Integer.parseInt(jtCapacidad.getText());
          
-            Mesa m1 = md.buscarMesaPorNumero(numMesa);
+            Mesa m = null;
 
             if (m == null) {
                 m = new Mesa(numMesa, capacidad);
                 md.agregarMesa(m);
                 
                 limpiar();
+                
             } else {
                 if (m.getCapacidad() == capacidad) {
                     JOptionPane.showMessageDialog(this, "La capacidad ingresada es la actual");

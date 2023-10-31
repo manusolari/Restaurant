@@ -474,7 +474,8 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
     }
 
     public void limpiarCampos() {
-        
+        jRBnumMesa.setSelected(false);
+        jRBMesero.setSelected(false);
         jCBMesa.setSelectedIndex(-1);
         jCBMesero.setSelectedIndex(-1);
     }

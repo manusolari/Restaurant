@@ -197,7 +197,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         Producto p= (Producto)jCBProducto.getSelectedItem();
         int idPedido=pd.pedidoXIdMesa(m);
         //Capturo los datos los pongo en la tabla
-        modelo.addRow(new Object[]{idPedido, p.getIdProducto(), p.getNombre(), cantidad, p.getPrecio()});
+        modelo.addRow(new Object[]{m.getNumeroMesa(), p.getIdProducto(),p.getNombre(), cantidad, p.getPrecio()});
         //Limpio los campos para seguir agregando productos
         jTFCantidad.setText("");
         jCBMesa.setSelectedItem(null);
