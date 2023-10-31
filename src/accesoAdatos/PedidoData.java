@@ -145,17 +145,15 @@ public class PedidoData {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Mesa m = new Mesa();
+                
                 Pedido p = new Pedido();
                 p.setIdPedido(rs.getInt("idPedido"));
                 int idmesa = (rs.getInt("idMesa"));
-                m.setIdMesa(idmesa);
-                p.setMesa(m);
+                p.setMesa(md.buscarMesaPorId(idmesa));
                 p.setImporte(rs.getDouble("importe"));
                 p.setCobrada(rs.getBoolean("cobrada"));
                 p.setFechaHora(rs.getDate("fecha_hora").toLocalDate());
                 p.setNombreMesero(rs.getString("nombreMesero"));
-
                 listaFecha.add(p);
             }
 

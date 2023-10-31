@@ -225,8 +225,7 @@ public class VistasFacturacion extends javax.swing.JInternalFrame {
 
      private void llenarTabla() {
         limpiarTabla();
-        //InscripcionData data = new InscripcionData();
-        //AlumnoData alu = new AlumnoData();
+        
         List<Pedido> listaF = pd.listarPedidosXFecha(fInicio, fFinal);
         for (Pedido pl : listaF) {
             modelo.addRow(new Object[]{pl.getIdPedido(), pl.getMesa().getNumeroMesa(),pd.buscarPedidoXid(pl.getIdPedido()),pl.getFechaHora(),pl.getNombreMesero()});
@@ -262,8 +261,7 @@ public class VistasFacturacion extends javax.swing.JInternalFrame {
      }
          private void llenarTablaTodo() {
         limpiarTabla();
-        //InscripcionData data = new InscripcionData();
-        //AlumnoData alu = new AlumnoData();
+       
         List<Pedido> listaTodo = pd.listarPedido();
         for (Pedido pl : listaTodo) {
             modelo.addRow(new Object[]{pl.getIdPedido(), pl.getMesa().getNumeroMesa(),pd.buscarPedidoXid(pl.getIdPedido()),pl.getFechaHora(),pl.getNombreMesero()});
