@@ -45,7 +45,6 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         Grupo1 = new javax.swing.ButtonGroup();
-        Grupo2 = new javax.swing.ButtonGroup();
         jPanel1 = new FondoPanel();
         jLabel1 = new javax.swing.JLabel();
         jRBPedidosXcobrar = new javax.swing.JRadioButton();
@@ -97,7 +96,6 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
         });
 
         jRBnumMesa.setBackground(new java.awt.Color(204, 204, 204));
-        Grupo2.add(jRBnumMesa);
         jRBnumMesa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jRBnumMesa.setForeground(new java.awt.Color(255, 255, 255));
         jRBnumMesa.setText("Buscar por numero de Mesa");
@@ -108,7 +106,6 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
         });
 
         jRBMesero.setBackground(new java.awt.Color(204, 204, 204));
-        Grupo2.add(jRBMesero);
         jRBMesero.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jRBMesero.setForeground(new java.awt.Color(255, 255, 255));
         jRBMesero.setText("Buscar nombre de Mesero");
@@ -360,25 +357,21 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
 
     private void jRBnumMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBnumMesaActionPerformed
         jCBMesa.setEnabled(jRBnumMesa.isSelected());
-        if (!jRBPedidosCobrados.isSelected() && !jRBPedidosXcobrar.isSelected()) {
-            JOptionPane.showMessageDialog(this, " Debe seleccionar si es un Pedido Cobrado o Pedido por Cobrado ");
-
-            jCBMesa.setSelectedIndex(-1);
-
-            jCBMesero.setSelectedIndex(-1);
-            DesactivarCampos();
+        if(jRBnumMesa.isSelected()){
+            jRBMesero.setSelected(false);
+             jCBMesero.setEnabled(false);
         }
+        
     }//GEN-LAST:event_jRBnumMesaActionPerformed
 
     private void jRBMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBMeseroActionPerformed
-        jCBMesero.setEnabled(jRBMesero.isSelected());
-        if (!jRBPedidosCobrados.isSelected() && !jRBPedidosXcobrar.isSelected()) {
-            JOptionPane.showMessageDialog(this, " Debe seleccionar si es un Pedido Cobrado o Pedido por Cobrado ");
-            DesactivarCampos();
-            jCBMesa.setSelectedIndex(-1);
-            jCBMesero.setSelectedIndex(-1);
 
+      jCBMesero.setEnabled(jRBMesero.isSelected());
+       if(jRBMesero.isSelected()){
+            jRBnumMesa.setSelected(false);
+            jCBMesa.setEnabled(false);
         }
+      
     }//GEN-LAST:event_jRBMeseroActionPerformed
 
     private void jCBMesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBMesaMouseClicked
@@ -401,7 +394,6 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup Grupo1;
-    private javax.swing.ButtonGroup Grupo2;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<Mesa> jCBMesa;
     private javax.swing.JComboBox<String> jCBMesero;
@@ -482,7 +474,7 @@ public class VistasEstadoDePedidos extends javax.swing.JInternalFrame {
     }
 
     public void limpiarCampos() {
-        Grupo2.clearSelection();
+        //Grupo2.clearSelection();
         jCBMesa.setSelectedIndex(-1);
         jCBMesero.setSelectedIndex(-1);
     }
