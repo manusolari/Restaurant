@@ -185,12 +185,13 @@ public class VistasListaDeProducto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRBPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBPorNombreActionPerformed
-        jRBTodos.setEnabled(false);
+        jRBTodos.setSelected(false);
         jTBuscarPorNombre.setEnabled(true);
     }//GEN-LAST:event_jRBPorNombreActionPerformed
 
     private void jRBTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTodosActionPerformed
-        jRBPorNombre.setEnabled(false);
+        
+        jRBPorNombre.setSelected(false);
         jTBuscarPorNombre.setEnabled(false);
         cargarTodos();
                 
@@ -202,7 +203,9 @@ public class VistasListaDeProducto extends javax.swing.JInternalFrame {
         ArrayList<Producto> lista= new ArrayList<>();
         lista= pd.listarProductos();
         for(Producto prod: lista){
-            if(prod.getNombre().startsWith(jTBuscarPorNombre.getText())){
+        String nombre = jTBuscarPorNombre.getText().toLowerCase();
+        String nombre2 = prod.getNombre().toLowerCase();
+            if(nombre2.startsWith(nombre)){
                 modelo.addRow(new Object[]{prod.getNombre(), prod.getIdProducto(), prod.getPrecio(), prod.getCantidad()});
             }
         }
@@ -261,6 +264,7 @@ public void armarCabecera(){
             modelo.addRow(new Object[]{pr.getNombre(), pr.getIdProducto(), pr.getPrecio(), pr.getCantidad()});
         }
     }
+    
     
        class FondoPanel extends JPanel
     {
