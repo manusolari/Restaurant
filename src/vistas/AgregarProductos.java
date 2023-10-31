@@ -203,7 +203,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         Producto p= (Producto)jCBProducto.getSelectedItem();
         int idPedido=pd.pedidoXIdMesa(m);
         //Capturo los datos los pongo en la tabla
-        modelo.addRow(new Object[]{m.getNumeroMesa(), p.getIdProducto(),p.getNombre(), cantidad, p.getPrecio()});
+        modelo.addRow(new Object[]{m.getNumeroMesa(), p.getIdProducto(),p.getNombre(),idPedido, cantidad, p.getPrecio()});
         //Limpio los campos para seguir agregando productos
         jTFCantidad.setText("");
         jCBMesa.setSelectedItem(null);
@@ -219,9 +219,9 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         try{
         //Se agregan todos los productos de la tabla
         for(int i=0; i<modelo.getRowCount(); i++){
-            Integer idPedido= (Integer)( modelo.getValueAt(i, 0));
+             Integer idPedido= (Integer)( modelo.getValueAt(i, 3));
             Integer idProducto= (Integer) modelo.getValueAt(i, 1);
-            Integer cantidad= (Integer)modelo.getValueAt(i, 3);
+            Integer cantidad= (Integer)modelo.getValueAt(i, 4);
             Pedido p= pd.buscarPedidoXid(idPedido);
             
             Producto pr= prodData.buscarProductoPorId(idProducto);
@@ -282,6 +282,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         modelo.addColumn("Numero de Mesa");
         modelo.addColumn("IdProducto");
         modelo.addColumn("Producto");
+        modelo.addColumn("IdPedido");
         modelo.addColumn("Cantidad");
         modelo.addColumn("Precio");
         jTabla.setModel(modelo);
