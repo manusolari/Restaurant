@@ -113,7 +113,7 @@ public class MesaData {
 
     public void agregarMesa(Mesa mesa) {
         Mesa m = buscarMesaPorNumero(mesa.getNumeroMesa());
-        String sql = "INSERT INTO mesa( numeroMesa, capacidad, estado) VALUES (  ? , ?, true )";
+        String sql = "INSERT INTO mesa( numeroMesa, capacidad, estado) VALUES (  ? , ?, ? )";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS);
@@ -124,6 +124,7 @@ public class MesaData {
             }
             ps.setInt(1, mesa.getNumeroMesa());
             ps.setInt(2, mesa.getCapacidad());
+            ps.setBoolean(3, true);
              ps.executeUpdate();
              ResultSet rs = ps.getGeneratedKeys();
            if (rs.next()){

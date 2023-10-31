@@ -26,13 +26,6 @@ public class Mesa {
         this.estadoMesa = estadoMesa;
     }
 
-    public Mesa(int numeroMesa, int capacidad) {
-        this.numeroMesa = numeroMesa;
-        this.capacidad = capacidad;
-    }
-    
-    
-
     
     public int getNumeroMesa() {
         return numeroMesa;

@@ -54,9 +54,6 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
         jtNumeroM = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         radioMNoDisponible.setBackground(new java.awt.Color(204, 204, 204));
         GrupoMesas.add(radioMNoDisponible);
@@ -68,7 +65,6 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
                 radioMNoDisponibleActionPerformed(evt);
             }
         });
-        jPanel1.add(radioMNoDisponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 400, -1, -1));
 
         radioMDisponible.setBackground(new java.awt.Color(204, 204, 204));
         GrupoMesas.add(radioMDisponible);
@@ -80,7 +76,6 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
                 radioMDisponibleActionPerformed(evt);
             }
         });
-        jPanel1.add(radioMDisponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 430, -1, -1));
 
         radioMTodas.setBackground(new java.awt.Color(204, 204, 204));
         GrupoMesas.add(radioMTodas);
@@ -92,27 +87,20 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
                 radioMTodasActionPerformed(evt);
             }
         });
-        jPanel1.add(radioMTodas, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 470, -1, -1));
 
         botonActivarB.setText("Activar Busqueda");
-        botonActivarB.setActionCommand(null);
-        botonActivarB.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(204, 255, 255), new java.awt.Color(153, 255, 255)));
         botonActivarB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonActivarBActionPerformed(evt);
             }
         });
-        jPanel1.add(botonActivarB, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 520, -1, -1));
 
         jButton1.setText("Salir");
-        jButton1.setActionCommand(null);
-        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(204, 255, 255), new java.awt.Color(153, 255, 255)));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 600, -1, -1));
 
         jtTablaM.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -127,8 +115,6 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtTablaM);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 400, 500, 90));
-
         jtNumeroM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtNumeroMActionPerformed(evt);
@@ -142,32 +128,82 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
                 jtNumeroMKeyTyped(evt);
             }
         });
-        jPanel1.add(jtNumeroM, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 360, 140, -1));
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Buscar Mesa por Numero :");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, -1, -1));
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Listas de Mesas");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, -1, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/mesas.jpg"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1850, 1130));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(90, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(41, 41, 41)
+                .addComponent(jtNumeroM, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(176, 176, 176))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(radioMNoDisponible)
+                            .addComponent(radioMDisponible)
+                            .addComponent(radioMTodas)
+                            .addComponent(botonActivarB))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addComponent(radioMNoDisponible)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(radioMDisponible)
+                .addGap(18, 18, 18)
+                .addComponent(radioMTodas)
+                .addGap(18, 18, 18)
+                .addComponent(botonActivarB)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(20, 20, 20))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtNumeroM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,9 +260,8 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
         Mesa m;
 
         try {
-           String numMesa = jtNumeroM.getText().trim();
-           if (!numMesa.isEmpty()){
-                m = md.buscarMesaPorNumero(Integer.parseInt(numMesa));
+            System.out.println(m = md.buscarMesaPorNumero(Integer.parseInt(jtNumeroM.getText())));
+
             if (m.getNumeroMesa() == (Integer.parseInt(jtNumeroM.getText()))) {
                 String estado;
                 if (m.isEstadoMesa()) {
@@ -235,7 +270,7 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
                     estado = "Inactivo";
                 }
                 modelo.addRow(new Object[]{m.getIdMesa(), m.getNumeroMesa(), m.getCapacidad(), estado});
-            }  
+                return;
             }
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(null, "Recuerde Eliminar los Espacios, solo Numeros");
@@ -249,7 +284,6 @@ public class VistaDisponibilidadDeMesa extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jtNumeroM;
